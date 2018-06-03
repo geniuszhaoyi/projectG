@@ -4,20 +4,20 @@ module.exports = {
             node_001: {
                 id: "node_001",
                 name: "Home",
-                position: {x: 100, y: 100, background: "bg_001"},
+                position: {x: 10, y: 10, background: "bg_001"},
                 to: [{id: "node_002", requiredItems: ["key_001"]}],
                 npcs: ["npc_001"]
             },
             node_002: {
                 id: "node_002",
-                name: "002",
-                position: {x: 100, y: 200, background: "bg_001"},
+                name: "Yard",
+                position: {x: 10, y: 120, background: "bg_001"},
                 to: [{id: "node_001"},{id: "node_003"}]
             },
             node_003: {
                 id: "node_003",
-                name: "003",
-                position: {x: 200, y: 100, background: "bg_001"},
+                name: "Street",
+                position: {x: 120, y: 120, background: "bg_001"},
                 to: [{id: "node_001"},{id: "node_002"}]
             }
         },
@@ -70,12 +70,18 @@ module.exports = {
                     },{
                         type: "giveItem",
                         items: ["key_001"]
+                    },{
+                        type: "script",
+                        script: 'Global.Game.npcs.npc_001.actions[2] = "action_004"'
                     }
-                ],
-                limit: 1,
-                outstandingAction: [
+                ]
+            },
+            action_004: {
+                id: "action_002",
+                label: "search",
+                action: [
                     {
-                        type: "text",
+                        type: "talk",
                         context: "It is empty now. "
                     }
                 ]
