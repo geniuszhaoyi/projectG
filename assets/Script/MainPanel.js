@@ -1,4 +1,4 @@
-var Global = require('Global');
+var Global = require('Global').storage;
 
 cc.Class({
     extends: cc.Component,
@@ -11,19 +11,19 @@ cc.Class({
     },
 
     updateVisiableNodes: function () {
-        for (var to of Global.Game.map[Global.Player.currentNode].to) {
+        for (var to of Global.Game.cities[Global.Player.currentNode].to) {
             Global.Player.visibleNode[to.id] = true;
         }
     },
 
     drawMap: function () {
-        var home = Global.Game.map[Global.Player.currentNode];
+        var home = Global.Game.cities[Global.Player.currentNode];
         for (var nodeid in Global.Player.visibleNode) {
             if (!Global.Player.visibleNode.hasOwnProperty(nodeid)) {
                 continue;
             }
 
-            var city = Global.Game.map[nodeid];
+            var city = Global.Game.cities[nodeid];
             if (city.position.background !== home.position.background){
                 continue;
             }
@@ -37,7 +37,7 @@ cc.Class({
 
             var newbtn = cc.instantiate(this.movebtnPrefab);
             this.node.addChild(newbtn);
-            console.log(newbtn);
+            // console.log(newbtn);
             newbtn.children[0].getComponent(cc.Label).string = city.name;
             newbtn.setPosition(cc.p(city.position.x, city.position.y));
 
@@ -61,7 +61,8 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        console.log("currentNode: " + Global.Player.currentNode);
+        // console.log(Global.Game);
+        // console.log("currentNode: " + Global.Player.currentNode);
         this.updateVisiableNodes();
         this.drawMap();
     },
