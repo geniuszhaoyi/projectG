@@ -14,6 +14,8 @@ cc.Class({
     newGame: function() {
         Global.Game = new Game();
         Global.Player = new Player();
+        console.log('Global: ');
+        console.log(Global);
         cc.director.loadScene("MainPanel");
     },
 

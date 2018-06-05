@@ -1,28 +1,18 @@
 var Global = require('Global').storage;
+var Game = require('Game/Game.js')
+var Player = require('Player/Player.js')
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        lblCurrentHealth: {
-            default: null,
-            type: cc.Label
-        },
-        lblLevel: {
-            default: null,
-            type: cc.Label
-        },
-        lblConstitution: {
-            default: null,
-            type: cc.Label
-        },
-
     },
 
     onLoad () {
-        this.lblCurrentHealth.getComponent(cc.Label).string = Global.Player.attributes.currentHealth;
-        this.lblLevel.getComponent(cc.Label).string = Global.Player.attributes.level;
-        this.lblConstitution.getComponent(cc.Label).string = Global.Player.attributes.constitution;
+        if(Global.Player === undefined || Global.Player === null) {
+            Global.Game = new Game();
+            Global.Player = new Player();
+        }
     },
 
     start () {
