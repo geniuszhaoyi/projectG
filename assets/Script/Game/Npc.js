@@ -1,9 +1,15 @@
 class Npc {
-    constructor(id, name, city) {
+    constructor(id, namedesc, city) {
         this.id = id;
-        this.name = name;
+        if(namedesc !== undefined) {
+            this.name = namedesc.name;
+            this.description = namedesc.description
+        }
         this.city = city;
     }
+    isVisiable() {
+        return true;
+    } 
     isInCity(city) {
         return this.city === city;
     }

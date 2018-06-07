@@ -28,6 +28,13 @@ cc.Class({
                 continue;
             }
 
+            var accessable = false;
+            for(var to of home.to) {
+                if(to.id === city.id) {
+                    accessable = true;
+                }
+            }
+    
             var newbtn = cc.instantiate(this.movebtnPrefab);
             this.node.addChild(newbtn);
             // console.log(newbtn);
@@ -44,6 +51,9 @@ cc.Class({
                 newbtn.color = cc.Color.YELLOW;
             }
             var button = newbtn.getComponent(cc.Button);
+            if(accessable === false) {
+                button.interactable = false;
+            }
             button.clickEvents.push(clickEventHandler);
 
         }
@@ -75,7 +85,7 @@ cc.Class({
             if (to.id === targetCityId) {
                 accessable = true;
                 if (to.requiredItems !== undefined) for (var rk of to.requiredItems) {
-                    if (Global.Player.hasItem(rk) == false) {
+                    if (Global.Player.invertory.hasItem(rk) == false) {
                         accessable = false;
                     }
                 }
