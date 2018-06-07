@@ -8,6 +8,10 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
+        sidebarPrefab: {
+            default: null,
+            type: cc.Prefab
+        }
     },
 
     updateVisiableNodes: function () {

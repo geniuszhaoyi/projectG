@@ -6,7 +6,7 @@ class Action_002 extends Action{
     name = "search";
     context = "You find a Rusky Key. Pick it up? "
     isVisiable() {
-        return Global.Player.getNpcStatus("key_001_pickedup") === false;
+        return Global.Player.getNpcStatus("key_001_pickedup") !== true;
     }
     start() {
         return {

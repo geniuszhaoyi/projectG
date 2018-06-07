@@ -1,10 +1,10 @@
 class Player {
     npcStatus = {}
     getNpcStatus(key) {
-        return npcStatus[key];
+        return this.npcStatus[key];
     }
     setNpcStatus(key, value) {
-        npcStatus[key] = value;
+        this.npcStatus[key] = value;
     }
     items = {
         // "key_001": 1,
