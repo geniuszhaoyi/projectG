@@ -74,6 +74,10 @@ cc.Class({
         // console.log("currentNode: " + Global.Player.currentNode);
         this.updateVisiableNodes();
         this.drawMap();
+        var sidebar=cc.instantiate(this.sidebarPrefab);
+        this.node.addChild(sidebar);
+        sidebar.setPosition(380,0);
+        
     },
 
     btnMove: function (event, customEventData) {
