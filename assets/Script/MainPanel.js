@@ -8,10 +8,6 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
-        sidebarPrefab: {
-            default: null,
-            type: cc.Prefab
-        }
     },
 
     updateVisiableNodes: function () {
@@ -28,20 +24,8 @@ cc.Class({
             }
 
             var city = Global.Game.cities[nodeid];
-            if (city.position.background !== home.position.background){
+            if (city.position.background !== home.position.background) {
                 continue;
-            }
-
-            var accessable = false;
-            for(var to of home.to) {
-                if(to.id === city.id) {
-                    accessable = true;
-                    if(to.requiredItems !== undefined) for(var rk of to.requiredItems) {
-                        if(Global.Player.hasItem(rk) == false) {
-                            accessable = false;
-                        }
-                    }
-                }
             }
 
             var newbtn = cc.instantiate(this.movebtnPrefab);
@@ -56,13 +40,10 @@ cc.Class({
             clickEventHandler.handler = "btnMove";
             clickEventHandler.customEventData = nodeid;
 
-            if(city.id === home.id) {
+            if (city.id === home.id) {
                 newbtn.color = cc.Color.YELLOW;
             }
             var button = newbtn.getComponent(cc.Button);
-            if(accessable === false) {
-                button.interactable = false;
-            }
             button.clickEvents.push(clickEventHandler);
 
         }
@@ -70,18 +51,44 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        if (Global.Game === undefined) {
+            cc.director.loadScene('welcomePage');
+        }
         // console.log(Global.Game);
         // console.log("currentCity: " + Global.Player.currentCity);
         this.updateVisiableNodes();
         this.drawMap();
-        var sidebar=cc.instantiate(this.sidebarPrefab);
-        this.node.addChild(sidebar);
-        sidebar.setPosition(380,0);
-        
     },
 
     btnMove: function (event, customEventData) {
+        var targetCityId = customEventData;
+        var home = Global.Game.cities[Global.Player.currentCity];
+
+        if (targetCityId === Global.Player.currentCity) {
+            Global.Player.currentCity = customEventData;
+            cc.director.loadScene('MainPanel');
+            return true;
+        }
+
+        var accessable = false;
+        for (var to of home.to) {
+            if (to.id === targetCityId) {
+                accessable = true;
+                if (to.requiredItems !== undefined) for (var rk of to.requiredItems) {
+                    if (Global.Player.hasItem(rk) == false) {
+                        accessable = false;
+                    }
+                }
+            }
+        }
+
+        if (accessable === false) {
+            console.log("unable to go to city", targetCityId);
+            return false;
+        }
+
         Global.Player.currentCity = customEventData;
         cc.director.loadScene('MainPanel');
+        return true;
     }
 });
