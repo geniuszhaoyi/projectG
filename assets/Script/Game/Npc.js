@@ -1,10 +1,14 @@
 class Npc {
-    constructor(id, name) {
+    constructor(id, name, city) {
         this.id = id;
         this.name = name;
+        this.city = city;
     }
-    isVisiable() {
-        return true;
+    isInCity(city) {
+        return this.city === city;
+    }
+    getCity() {
+        return this.city;
     }
     actions = []
 }
