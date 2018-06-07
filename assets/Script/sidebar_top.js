@@ -58,19 +58,18 @@ cc.Class({
         // for(item in items){
 
         // }
-        var npclist=Global.Game.npcs;
-        var j=0;
+        console.log(Global.Player.currentCity);
+        var npclist=Global.Game.cities[Global.Player.currentCity].getNpcList();
         for(var i=0;i<npclist.length;i++){
-            if(npclist[i].getCity==Global.Player.currentCity){
+            
             var newitem=cc.instantiate(this.itemPre);
 
             this.node.addChild(newitem);
 
-            newitem.setPosition(0,-70*j-50);
-            newitem.getComponent('button').intit(list[i]);
+            newitem.setPosition(0,-70*i-50);
+            newitem.getComponent('button').intit(npclist[i]);
             this.allitems.push(newitem);
-            j++;
-            }
+            
         }
         this.node.height=-newitem.getPosition().y+70;
     },

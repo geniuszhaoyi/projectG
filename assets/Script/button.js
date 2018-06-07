@@ -89,7 +89,7 @@ cc.Class({
     intit(name){
 
 
-        this.labelPre.string=name;
+        this.labelPre.string=name.id;
 
     }
     

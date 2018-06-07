@@ -60,8 +60,8 @@ class Player {
         currentHealth: 1000,
         currentMana: 0,
     };
-    currentNode = "city_001";
-    visibleNode = {"city_001": true};
+    currentCity = "city_001";
+    visibleCities = {"city_001": true};
 }
 
 module.exports = Player;

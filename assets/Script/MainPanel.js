@@ -15,15 +15,15 @@ cc.Class({
     },
 
     updateVisiableNodes: function () {
-        for (var to of Global.Game.cities[Global.Player.currentNode].to) {
-            Global.Player.visibleNode[to.id] = true;
+        for (var to of Global.Game.cities[Global.Player.currentCity].to) {
+            Global.Player.visibleCities[to.id] = true;
         }
     },
 
     drawMap: function () {
-        var home = Global.Game.cities[Global.Player.currentNode];
-        for (var nodeid in Global.Player.visibleNode) {
-            if (!Global.Player.visibleNode.hasOwnProperty(nodeid)) {
+        var home = Global.Game.cities[Global.Player.currentCity];
+        for (var nodeid in Global.Player.visibleCities) {
+            if (!Global.Player.visibleCities.hasOwnProperty(nodeid)) {
                 continue;
             }
 
@@ -71,7 +71,7 @@ cc.Class({
     // use this for initialization
     onLoad: function () {
         // console.log(Global.Game);
-        // console.log("currentNode: " + Global.Player.currentNode);
+        // console.log("currentCity: " + Global.Player.currentCity);
         this.updateVisiableNodes();
         this.drawMap();
         var sidebar=cc.instantiate(this.sidebarPrefab);
@@ -81,7 +81,7 @@ cc.Class({
     },
 
     btnMove: function (event, customEventData) {
-        Global.Player.currentNode = customEventData;
+        Global.Player.currentCity = customEventData;
         cc.director.loadScene('MainPanel');
     }
 });

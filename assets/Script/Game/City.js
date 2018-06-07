@@ -10,7 +10,8 @@ class City {
     }
     getNpcList() {
         var res = [];
-        for(var npc of Global.Game.npcs) {
+        for(var id in Global.Game.npcs) {
+            var npc = Global.Game.npcs[id];
             if(npc.isInCity(this.id)) {
                 res.push(npc);
             }
