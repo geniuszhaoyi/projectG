@@ -71,7 +71,7 @@ cc.Class({
             this.allitems.push(newitem);
             
         }
-        this.node.height=-newitem.getPosition().y+70;
+        this.node.height=-(-70*i-50)+70;
     },
     ldit(){
         this.node.removeAllChildren();
