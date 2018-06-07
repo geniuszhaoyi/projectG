@@ -1,13 +1,54 @@
 class Player {
     npcStatus = {}
     getNpcStatus(key) {
-        return npcStatus[key];
+        return this.npcStatus[key];
     }
     setNpcStatus(key, value) {
-        npcStatus[key] = value;
+        this.npcStatus[key] = value;
     }
-    giveItem() {
-        return false;
+    items = {
+        // "key_001": 1,
+    }
+    /**
+     * Put items to player's inventory. Same items will be merged. 
+     * @param {String} itemid 
+     * @param {int} quantity 
+     */
+    giveItem(itemid, quantity) {
+        if(quantity <= 0) {
+            throw new Error('Parameter [quantity] must be larger than 0, but get ' + quantity);
+        }
+        if(this.items.hasOwnProperty(itemid) === false) {
+            this.items[itemid] = 0;
+        }
+        this.items[itemid] += quantity;
+        return true;
+    }
+    /**
+     * Remove items from player's inventory. If param quantity is larger than existing items, all items will be removed. 
+     * @param   {String} itemid 
+     * @param   {int} quantity 
+     * @return  Quantity of items left. 
+     */
+    removeItem(itemid, quantity) {
+        if(quantity <= 0) {
+            throw new Error('Parameter [quantity] must be larger than 0, but get ' + quantity);
+        }
+        if(this.items.hasOwnProperty(itemid) === false) {
+            return false;
+        }
+        this.items[itemid] -= quantity;
+        if(this.items[itemid] <= 0) {
+            delete this.items[itemid];
+        }
+        return this.items[itemid];
+    }
+    hasItem(itemid, quantity) {
+        if(quantity === undefined) {
+            return this.items.hasOwnProperty(itemid);
+        }else {
+            return this.items.hasOwnProperty(itemid) && this.items[itemid] >= quantity;
+        }
     }
     attributes = {
         level: 0,

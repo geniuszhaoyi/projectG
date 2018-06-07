@@ -8,6 +8,10 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
+        sidebarPrefab: {
+            default: null,
+            type: cc.Prefab
+        }
     },
 
     updateVisiableNodes: function () {
@@ -32,6 +36,11 @@ cc.Class({
             for(var to of home.to) {
                 if(to.id === city.id) {
                     accessable = true;
+                    if(to.requiredItems !== undefined) for(var rk of to.requiredItems) {
+                        if(Global.Player.hasItem(rk) == false) {
+                            accessable = false;
+                        }
+                    }
                 }
             }
 
