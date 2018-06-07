@@ -51,6 +51,9 @@ cc.Class({
         this.content.string=this.act.context;
     },
     closeSW(){
+        var actlay=cc.find("Canvas/sidebar/sidebar_top/view/mask/popup/action_layout");
+        console.log(actlay);
+        actlay.getComponent('action_layout').setbtn();
         this.node.removeFromParent();
     },
     choose(a,b){
