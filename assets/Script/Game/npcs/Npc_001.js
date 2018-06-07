@@ -5,7 +5,8 @@ var Action_003 = require ('./../actions/Action_003');
 
 class Npc_001 extends Npc{
     id = "npc_001";
-    name = "npc001";
+    name = "Old ";
+    city = 'city_001';
     isVisiable() {
         return true;
     }

@@ -8,40 +8,24 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
-        sidebarPrefab: {
-            default: null,
-            type: cc.Prefab
-        }
     },
 
     updateVisiableNodes: function () {
-        for (var to of Global.Game.cities[Global.Player.currentNode].to) {
-            Global.Player.visibleNode[to.id] = true;
+        for (var to of Global.Game.cities[Global.Player.currentCity].to) {
+            Global.Player.visibleCities[to.id] = true;
         }
     },
 
     drawMap: function () {
-        var home = Global.Game.cities[Global.Player.currentNode];
-        for (var nodeid in Global.Player.visibleNode) {
-            if (!Global.Player.visibleNode.hasOwnProperty(nodeid)) {
+        var home = Global.Game.cities[Global.Player.currentCity];
+        for (var nodeid in Global.Player.visibleCities) {
+            if (!Global.Player.visibleCities.hasOwnProperty(nodeid)) {
                 continue;
             }
 
             var city = Global.Game.cities[nodeid];
-            if (city.position.background !== home.position.background){
+            if (city.position.background !== home.position.background) {
                 continue;
-            }
-
-            var accessable = false;
-            for(var to of home.to) {
-                if(to.id === city.id) {
-                    accessable = true;
-                    if(to.requiredItems !== undefined) for(var rk of to.requiredItems) {
-                        if(Global.Player.hasItem(rk) == false) {
-                            accessable = false;
-                        }
-                    }
-                }
             }
 
             var newbtn = cc.instantiate(this.movebtnPrefab);
@@ -56,13 +40,10 @@ cc.Class({
             clickEventHandler.handler = "btnMove";
             clickEventHandler.customEventData = nodeid;
 
-            if(city.id === home.id) {
+            if (city.id === home.id) {
                 newbtn.color = cc.Color.YELLOW;
             }
             var button = newbtn.getComponent(cc.Button);
-            if(accessable === false) {
-                button.interactable = false;
-            }
             button.clickEvents.push(clickEventHandler);
 
         }
@@ -70,14 +51,44 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+        if (Global.Game === undefined) {
+            cc.director.loadScene('welcomePage');
+        }
         // console.log(Global.Game);
-        // console.log("currentNode: " + Global.Player.currentNode);
+        // console.log("currentCity: " + Global.Player.currentCity);
         this.updateVisiableNodes();
         this.drawMap();
     },
 
     btnMove: function (event, customEventData) {
-        Global.Player.currentNode = customEventData;
+        var targetCityId = customEventData;
+        var home = Global.Game.cities[Global.Player.currentCity];
+
+        if (targetCityId === Global.Player.currentCity) {
+            Global.Player.currentCity = customEventData;
+            cc.director.loadScene('MainPanel');
+            return true;
+        }
+
+        var accessable = false;
+        for (var to of home.to) {
+            if (to.id === targetCityId) {
+                accessable = true;
+                if (to.requiredItems !== undefined) for (var rk of to.requiredItems) {
+                    if (Global.Player.hasItem(rk) == false) {
+                        accessable = false;
+                    }
+                }
+            }
+        }
+
+        if (accessable === false) {
+            console.log("unable to go to city", targetCityId);
+            return false;
+        }
+
+        Global.Player.currentCity = customEventData;
         cc.director.loadScene('MainPanel');
+        return true;
     }
 });
