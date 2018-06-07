@@ -7,7 +7,7 @@
 // Learn life-cycle callbacks:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
-var test=require("dialog");
+
 cc.Class({
     extends: cc.Component,
 
@@ -27,19 +27,16 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        labelPre:{
+        title:{
             default:null,
             type:cc.Label,
         },
-        diaPre:{
+        content:{
             default:null,
-            type:cc.Prefab,
-        },
-        switchPre:{
-            default:null,
-            type:cc.Prefab,
+            type:cc.Label,
         },
         act:null,
+
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -49,35 +46,23 @@ cc.Class({
     start () {
 
     },
-    btn_clicked(){
-        var content=this.act.start();
-        switch(content.type){
-            case 0:
-                console.log("talk");
-                var dia=cc.instantiate(this.diaPre);
-                cc.find("Canvas").addChild(dia);
-                dia.getComponent('dialog').initdialog(content);
-                dia.setPosition(0,-202);
-                break;
-            case 1:
-                console.log(content);
-                var stch=cc.instantiate(this.switchPre);
-                cc.find("Canvas").addChild(stch);
-                stch.getComponent('switch').initSW(content);
-                stch.setPosition(0,-202);
-                break;
-            case 2:
-                console.log("fight");
-                break;
-            default:
-                console.log("ignore");
+    initSW(content){
+        this.act=content;
+        this.content.string=this.act.context;
+    },
+    closeSW(){
+        this.node.removeFromParent();
+    },
+    choose(a,b){
+        if(b==true||b=="true"){
+            this.act.callback(true);
+            this.closeSW();
+            
+        }
+        if(b==false||b=="false"){
+            this.act.callback(false);
+            this.closeSW();
         }
     },
-    initBtn(actin){
-        
-        this.act=actin;
-        this.labelPre.string=this.act.name;
-        
-    }
     // update (dt) {},
 });
