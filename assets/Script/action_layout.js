@@ -43,6 +43,11 @@ cc.Class({
             console.log(acts[i]);
             this.actions.push(acts[i]);
         }
+       this.setbtn();
+
+    },
+    setbtn(){
+        this.node.removeAllChildren();
         var i=0;
         for(var act in this.actions){
             console.log(this.actions[act]);
@@ -55,7 +60,6 @@ cc.Class({
             //console.log(i/3);
             }
         }
-
     },
     start () {
 
