@@ -103,7 +103,5 @@ cc.Class({
         return true;
     },
 
-    btnPlayerInspect: function () {
-        cc.director.loadScene('PlayerInspect_Page1');
-    },
+   
 });
