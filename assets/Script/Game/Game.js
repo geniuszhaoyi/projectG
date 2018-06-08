@@ -13,8 +13,8 @@ class Game {
     }
     items = {
         key_001:    new Item("key_001", "Rusky Key", "An old rusky key. "),
-        weapon_001: new Item("weapon_001", "Cleaver", "An old rusky cleaver. ", null, 8, [0, 0, 10, 0, 0, 0, 0, 0, 0]),
-        pant_001:   new Item("pant_001", "Gunny Pant", "An old gunny pant. ", null, 8, [0, 0, 0, 0, 10, 0, 0, 0, 0]),
+        weapon_001: new Item("weapon_001", "Cleaver", "An old rusky cleaver. ", 8, [0, 0, 10, 0, 0, 0, 0, 0, 0]),
+        pant_001:   new Item("pant_001", "Gunny Pant", "An old gunny pant. ", 4, [0, 0, 0, 0, 10, 0, 0, 0, 0]),
     }
     backgrounds = {
         bg_001: new Background("bg_001"),

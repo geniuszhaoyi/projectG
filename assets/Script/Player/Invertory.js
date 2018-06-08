@@ -1,5 +1,6 @@
 class Invertory {
-    items = {/* "key_001": 1*/};
+    // items = {"key_001": 2, "pant_001": 1};
+    items = {};
     /**
      * Put items to player's inventory. Same items will be merged. 
      * @param {String} itemid 

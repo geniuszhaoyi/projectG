@@ -16,7 +16,7 @@ cc.Class({
 
     createLabel(l, value) {
         var label = cc.instantiate(this.attributeLabel);
-        cc.find('Canvas/page_1/layout_grid').addChild(label);
+        cc.find('Canvas/layout_grid').addChild(label);
         label.children[0].getComponent(cc.Label).string = l;
         label.children[1].getComponent(cc.Label).string = value;
         return label;
@@ -34,6 +34,10 @@ cc.Class({
     },
 
     onLoad () {
+        if(Global.Player === undefined || Global.Player === null) {
+            Global.Game = new Game();
+            Global.Player = new Player();
+        }
         this.createAttributes();
     },
 

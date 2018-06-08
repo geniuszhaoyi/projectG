@@ -61,8 +61,9 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        if (Global.Game === undefined) {
+        if (!Global.Game) {
             cc.director.loadScene('welcomePage');
+            return;
         }
         // console.log(Global.Game);
         // console.log("currentCity: " + Global.Player.currentCity);
@@ -100,5 +101,9 @@ cc.Class({
         Global.Player.currentCity = customEventData;
         cc.director.loadScene('MainPanel');
         return true;
-    }
+    },
+
+    btnPlayerInspect: function () {
+        cc.director.loadScene('PlayerInspect_Page1');
+    },
 });

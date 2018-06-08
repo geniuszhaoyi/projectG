@@ -1,9 +1,8 @@
 class Item {
-    constructor(id, name, description, image, equipPosition, attributes) {
+    constructor(id, name, description, equipPosition, attributes) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.image = image;
         this.equipPosition = equipPosition;
         this.attributes = attributes;
     }
