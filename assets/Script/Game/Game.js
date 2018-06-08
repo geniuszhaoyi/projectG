@@ -3,6 +3,7 @@ var Position = require("Position");
 var Item = require("Item");
 var Background = require("Background");
 var Npc_001 = require("npcs/Npc_001");
+var Npc_Item = require("npcs/Npc_Item");
 
 class Game {
     cities = {
@@ -11,13 +12,16 @@ class Game {
         city_003: new City("city_003", "Street", new Position(120, 120, "bg_001"), [{id: "city_001"},{id: "city_002"}]),
     }
     items = {
-        key_001: new Item("key_001", "Rusky Key", "An old rusky key. "),
+        key_001:    new Item("key_001", "Rusky Key", "An old rusky key. "),
+        weapon_001: new Item("weapon_001", "Cleaver", "An old rusky cleaver. ", 8, [0, 0, 10, 0, 0, 0, 0, 0, 0]),
+        pant_001:   new Item("pant_001", "Gunny Pant", "An old gunny pant. ", 4, [0, 0, 0, 0, 10, 0, 0, 0, 0]),
     }
     backgrounds = {
         bg_001: new Background("bg_001"),
     }
     npcs = {
         npc_001: new Npc_001(),
+        npc_002: new Npc_Item('npc_002', {name: 'Old Well', description: 'It has been abandon for years. Looks like something is down there. '}, 'city_003', 'weapon_001', 1),
     }
     constructor() {
     }

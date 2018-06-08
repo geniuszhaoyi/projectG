@@ -5,11 +5,9 @@ var Action_003 = require ('./../actions/Action_003');
 
 class Npc_001 extends Npc{
     id = "npc_001";
-    name = "Old ";
+    name = "Old Talking Closet";
+    description = "Weird old closet that talks. Be careful. ";
     city = 'city_001';
-    isVisiable() {
-        return true;
-    }
     actions = [new Action_001(), new Action_002(), new Action_003()]
 }
 
