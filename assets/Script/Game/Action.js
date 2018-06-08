@@ -11,7 +11,7 @@ class Action {
         return {
             context: this.context,
             type: 0,
-            callback: this._callback
+            callback: this._callback.bind(this)
         };
     }
     _callback(message) {

@@ -36,6 +36,8 @@ cc.Class({
     start () {
         
     },
-
+    btnPlayerInspect() {
+        cc.director.loadScene('PlayerInspect_Page1');
+    },
     // update (dt) {},
 });
