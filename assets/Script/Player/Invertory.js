@@ -1,6 +1,8 @@
+var Global = require('./../Global').storage;
+
 class Invertory {
     // items = {"key_001": 2, "pant_001": 1};
-    items = {};
+    items = {"helmet_001": 1};
     /**
      * Put items to player's inventory. Same items will be merged. 
      * @param {String} itemid 
@@ -33,7 +35,7 @@ class Invertory {
         if(this.items[itemid] <= 0) {
             delete this.items[itemid];
         }
-        return this.items[itemid];
+        return true;
     }
     hasItem(itemid, quantity) {
         if(quantity === undefined) {
@@ -53,25 +55,26 @@ class Invertory {
         if(Global.Game.items[itemid].equipPosition === undefined) {
             return false;
         }
-        if(hasItem(itemid, 1) === false) {
+        if(this.hasItem(itemid, 1) === false) {
             return false;
         }
-        unequipPosition(Global.Game.items[itemid].equipPosition);
-        removeItem(itemid, 1);
+        this.unequipPosition(Global.Game.items[itemid].equipPosition);
+        this.removeItem(itemid, 1);
+        this.equipments[Global.Game.items[itemid].equipPosition] = itemid;
         return true;
     }
     unequipItem(item) {
         if(Global.Game.items[itemid].equipPosition === undefined) {
             return false;
         }
-        return unequipPosition(Global.Game.items[itemid].equipPosition);
+        return this.unequipPosition(Global.Game.items[itemid].equipPosition);
     }
     unequipPosition(position) {
-        if(equipments[position] === undefined) {
+        if(this.equipments[position] === undefined) {
             return false;
         }
-        giveItem(equipments[position], 1);
-        delete equipments[position];
+        this.giveItem(this.equipments[position], 1);
+        delete this.equipments[position];
         return true;
     }
 

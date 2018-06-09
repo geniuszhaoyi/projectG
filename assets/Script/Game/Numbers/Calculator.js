@@ -13,7 +13,6 @@ class Calculator {
             (b[3] * 1.2),
             (b[3] * 0.8),
         ];
-        console.log(res);
         for(var j in items) {
             var item = Global.Game.items[items[j]].attributes;
             for(var i in res) {

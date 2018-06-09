@@ -12,6 +12,8 @@ class Game {
         city_003: new City("city_003", "Street", new Position(120, 120, "bg_001"), [{id: "city_001"},{id: "city_002"}]),
     }
     items = {
+        item_001:   new Item("item_001", "Moldy Book", "An old moldy book. You can hardly read the writing. "),
+        helmet_001: new Item("helmet_001", "Fool's Crown", "Every normal person knows its meaning. ", 0, [-600, 0, 110, 0, -150, 0, 0, 0, 0]),
         key_001:    new Item("key_001", "Rusky Key", "An old rusky key. "),
         weapon_001: new Item("weapon_001", "Cleaver", "An old rusky cleaver. ", 8, [0, 0, 10, 0, 0, 0, 0, 0, 0]),
         pant_001:   new Item("pant_001", "Gunny Pant", "An old gunny pant. ", 4, [0, 0, 0, 0, 10, 0, 0, 0, 0]),
