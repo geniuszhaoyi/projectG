@@ -73,7 +73,7 @@ cc.Class({
     btnEquipItem (event, customEventData) {
         var itemid = customEventData;
         Global.Player.invertory.equipItem(itemid);
-        cc.director.loadScene('PlayerInspect_Items');
+        cc.director.loadScene(cc.director.getScene().name);
     },
 
     createText(text, fontSize, align) {

@@ -39,7 +39,7 @@ cc.Class({
         this.loadicon();
     },
     loadicon(){
-        var invert = Global.Player.invertory.items;
+        var invert = Global.Player.invertory.getItemsInArray();
         var allItems = Global.Game.items;
         for(var equip in invert){
             if(allItems[invert[equip].id].equipPosition<50){
