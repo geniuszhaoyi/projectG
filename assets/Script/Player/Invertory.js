@@ -2,7 +2,24 @@ var Global = require('./../Global').storage;
 
 class Invertory {
     // items = {"key_001": 2, "pant_001": 1};
-    items = {"helmet_001": 1};
+    //items = {"helmet_001": 1};
+    items =[{
+        id:"helmet_001",
+        quantity:1,
+    },{
+        id:"helmet_001",
+        quantity:1,
+    },{
+        id:"helmet_001",
+        quantity:1,
+    },{
+        id:"weapon_001",
+        quantity:1,
+    },{
+        id:"helmet_001",
+        quantity:1,
+    },
+    ];
     /**
      * Put items to player's inventory. Same items will be merged. 
      * @param {String} itemid 
