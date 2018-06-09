@@ -25,7 +25,11 @@ cc.Class({
             type: String,
         }
     },
-
+    setProperties(a, b, c){
+        this.itemid = a;
+        this.ItemDetailsScroll = b;
+        this.quantity = c;
+    },
     onLoad () {
         this.node.getChildren()[0].getComponent(cc.Label).string = this.quantity;
         cc.loader.loadRes("Texture/Item/" + this.itemid + "", function(err, data) {

@@ -22,4 +22,7 @@ cc.Class({
     btnItems() {
         cc.director.loadScene('PlayerInspect_Items');
     },
+    btnEquip(){
+        cc.director.loadScene('PlayerEqument');
+    },
 });

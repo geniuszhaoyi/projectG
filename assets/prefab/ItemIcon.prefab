@@ -51,8 +51,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 120,
-      "height": 120
+      "width": 80,
+      "height": 80
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -114,8 +114,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -60,
-      "y": -60
+      "x": -47,
+      "y": -46
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -255,7 +255,8 @@
     },
     "_enabled": true,
     "itemid": null,
-    "ItemDetailsScroll": null
+    "ItemDetailsScroll": null,
+    "quantity": ""
   },
   {
     "__type__": "cc.PrefabInfo",
