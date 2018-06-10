@@ -35,6 +35,7 @@ cc.Class({
             default:null,
             type:cc.Label,
         },
+        dia:null,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -47,7 +48,9 @@ cc.Class({
 
     },
     initdialog(content){
-        this.content.string=content.context;
+        this.dia=content;
+        this.title.string=this.dia.name;
+        this.content.string=this.dia.context;
     },
     closeDialog(){
         var actlay=cc.find("Canvas/sidebar/sidebar_top/view/mask/popup/action_layout");
