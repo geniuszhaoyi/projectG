@@ -1,6 +1,10 @@
-var Global = require('./../../Global').storage;
 
 class Calculator {
+    /**
+     * 
+     * @param {Object} b Basic Attributes
+     * @param {[Invertory.Item]} items Extended items
+     */
     static getDerivedAttributes(b, items) {
         var res = [
             (b[1] * 10 + b[2]) * (b[0] * 0.015 + 1),
@@ -13,10 +17,12 @@ class Calculator {
             (b[3] * 1.2),
             (b[3] * 0.8),
         ];
-        for(var j in items) {
-            var item = Global.Game.items[items[j]].attributes;
+        for(var item of items) if(item.equipped >= 0 && item.attributes !== undefined){
+            if(item.attributes === undefined) {
+                console.log('Warning: You equipped an non-equippable item. [Calculator line 22]');
+            }
             for(var i in res) {
-                res[i] += item[i];
+                res[i] += item.attributes[i];
             }
         }
         return res;

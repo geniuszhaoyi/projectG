@@ -1,38 +1,26 @@
-// Learn cc.Class:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
-// Learn Attribute:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/reference/attributes.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/reference/attributes.html
-// Learn life-cycle callbacks:
-//  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
-//  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
+var Global = require('Global').storage;
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        itemid: {
+        id: {
             default: null,
-            type: String,
+            type: cc.Integer,
         },
         ItemDetailsScroll: {
             default: null,
             type: cc.Node
         },
-        quantity: {
-            default: "",
-            type: String,
-        }
     },
-    setProperties(a, b, c){
-        this.itemid = a;
-        this.ItemDetailsScroll = b;
-        this.quantity = c;
+    setProperties(id, itemDetailScroll) {
+        this.id = id;
+        this.ItemDetailsScroll = itemDetailScroll;
     },
     onLoad () {
-        this.node.getChildren()[0].getComponent(cc.Label).string = this.quantity;
-        cc.loader.loadRes("Texture/Item/" + this.itemid + "", function(err, data) {
+        this.item = Global.Player.invertory.getItemById(this.id);
+        this.node.getChildren()[0].getComponent(cc.Label).string = (this.item.quantity === 1 ? '' : this.item.quantity);
+        cc.loader.loadRes("Texture/Item/" + this.item.itemid + "", function(err, data) {
             if (!err) {
                 this.spriteFrame = new cc.SpriteFrame(data);
             }else {
@@ -41,6 +29,9 @@ cc.Class({
                 }.bind(this));
             }
         }.bind(this.node.getComponent(cc.Sprite)));
+        if(this.item.equipped >= 0) {
+            this.node.getChildren()[1].opacity = 255;
+        }
     },
 
     start () {
@@ -50,6 +41,6 @@ cc.Class({
     // update (dt) {},
 
     btnClick() {
-        this.ItemDetailsScroll.getComponent("ItemDetailsScroll").showItem(this.itemid);
+        this.ItemDetailsScroll.getComponent("ItemDetailsScroll").showItem(this.id);
     },
 });
