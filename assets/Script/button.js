@@ -48,6 +48,7 @@ cc.Class({
             default:null,
             type:cc.Prefab,
         },
+        curnpc:null,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -78,19 +79,17 @@ cc.Class({
             tmp.addChild(newmask);
             newmask.addChild(newpop);
             newmask.setPosition(-382,-69);
-            var npc=Global.Game.npcs[this.labelPre.string];
-            console.log(this.labelPre.string+"  "+npc+"   "+Global.Game.npcs["npc_002"])
-            newpop.getComponent('popwin').initPop(npc);
+            //var npc=Global.Game.npcs[this.labelPre.string];
+            //console.log(this.labelPre.string+"  "+curnpc+"   "+Global.Game.npcs["npc_002"])
+            newpop.getComponent('popwin').initPop(this.curnpc);
             newpop.setPosition(380,64);
        // }
     },
 
     //初始化当前的button
-    intit(name){
-
-
-        this.labelPre.string=name.id;
-
+    intit(npc){
+        this.curnpc=npc;
+        this.labelPre.string=npc.name;
     }
     
 });

@@ -42,9 +42,9 @@ cc.Class({
         var invert = Global.Player.invertory.getItemsInArray();
         var allItems = Global.Game.items;
         for(var equip in invert){
-            if(allItems[invert[equip].id].equipPosition<50){
+            if(allItems[invert[equip].itemid].equipPosition<50){
                 var icon = cc.instantiate(this.itemico);
-                icon.getComponent('ItemIcon').setProperties(invert[equip].id,cc.find("Canvas/ItemDetailsScroll"),invert[equip].quantity);
+                icon.getComponent('ItemIcon').setProperties(equip,cc.find("Canvas/ItemDetailsScroll"));
                 cc.find("Canvas/page_1/singleColor/scrollview/view/content").addChild(icon);
             }
         }
