@@ -2,7 +2,7 @@ var Global = require('./../Global').storage;
 
 class Invertory {
     // items = {"key_001": 2, "pant_001": 1};
-    currentId = 0;
+    currentId = 2;
     items = {
         0: {
             itemid: "helmet_001",
@@ -31,16 +31,56 @@ class Invertory {
     //     quantity:1,
     // },
     // ];
+    /**
+     * Extend item with information in Game.items
+     * @param {Invertory.Item} item 
+     */
+    static extendItem(item) {
+        var res = [];
+        var gameitem = Global.Game.items[item.itemid];
+        for (var key in gameitem) if (gameitem.hasOwnProperty(key)) {
+            res[key] = gameitem[key];
+        }
+        for (var key in item) if (item.hasOwnProperty(key)) {
+            res[key] = item[key];
+        }
+        return res;
+    }
 
     /**
      * Get a plain array view of items. 
-     * @return {[{itemid: string, quantity: int, [equipped: int]}]}
+     * @return {[{id: int, itemid: string, quantity: int, [equipped: int]}]}
      */
     getItemsInArray() {
         var res = [];
-        for (var id in this.items) {
+        for (var id in this.items) if (this.items.hasOwnProperty(id)) {
             var item = this.items[id];
+            item.id = id;
             res.push(item);
+        }
+        return res;
+    }
+    getItemById(id) {
+        if(id === undefined) {
+            throw new Error('parameter [id] is undefined');
+        }
+        if(this.items.hasOwnProperty(id) === false) {
+            throw new Error('There is no item with id ' + id);
+        }
+        return this.items[id];
+    }
+    /**
+     * Get items by itemid
+     * Time Complexity: O(items.length)
+     * @param {String} itemid 
+     */
+    getItemsByItemid(itemid) {
+        var res = [];
+        for (var id in this.items) if (this.items.hasOwnProperty(id)) {
+            var item = this.items[id];
+            if (item.itemid === itemid) {
+                res.push(item);
+            }
         }
         return res;
     }
@@ -54,19 +94,15 @@ class Invertory {
         if (quantity <= 0) {
             throw new Error('Parameter [quantity] must be larger than 0, but get ' + quantity);
         }
-        for (var id in this.items) {
-            var item = this.items[id];
-            if (item.itemid === itemid) {
-                item.quantity += quantity;
-                return true;
-            }
+        for (var item of this.getItemsByItemid(itemid)) {
+            item.quantity += quantity;
+            return true;
         }
-        this.items.push({
-            id: currentId,
+        this.items[this.currentId] = {
             itemid: itemid,
             quantity: quantity,
-        });
-        currentId += 1;
+        };
+        this.currentId += 1;
         return true;
     }
     /**
@@ -80,16 +116,13 @@ class Invertory {
         if (quantity <= 0) {
             throw new Error('Parameter [quantity] must be larger than 0, but get ' + quantity);
         }
-        for (var id in this.items) {
-            var item = this.items[id];
-            if (item.itemid === itemid) {
-                if (item.quantity > quantity) {
-                    item.quantity -= quantity;
-                    return true;
-                } else {
-                    quantity -= item.quantity;
-                    delete this.items[id];
-                }
+        for (var item of this.getItemsByItemid(itemid)) {
+            if (item.quantity > quantity) {
+                item.quantity -= quantity;
+                return true;
+            } else {
+                quantity -= item.quantity;
+                delete this.items[id];
             }
         }
         return quantity === 0;
@@ -101,11 +134,8 @@ class Invertory {
         if (quantity === undefined) {
             quantity = 1;
         }
-        for (var id in this.items) {
-            var item = this.items[id];
-            if (item.itemid === itemid) {
-                quantity -= item.quantity;
-            }
+        for (var item of this.getItemsByItemid(itemid)) {
+            quantity -= item.quantity;
         }
         return quantity <= 0;
     }
@@ -117,9 +147,9 @@ class Invertory {
      * @param {int} position optional
      */
     equipId(id, position) {
-        if(position === undefined) {
+        if (position === undefined) {
             position = Global.Game.items[this.items[id].itemid].equipPosition;
-            if(position === undefined) {
+            if (position === undefined) {
                 return false;
             }
         }
@@ -134,10 +164,18 @@ class Invertory {
         }
         return false;
     }
+    switchEquipId(id) {
+        var item = this.getItemById(id);
+        if(item.equipped >= 0) {
+            this.unequipId(id);
+        }else {
+            this.equipId(id);
+        }
+    }
     unequipPosition(position) {
-        for (var id in this.items) {
+        for (var id in this.items) if(this.items.hasOwnProperty(id)) {
             var item = this.items[id];
-            if(item.equipped === position) {
+            if (item.equipped === position) {
                 this.unequipId(id);
             }
         }
@@ -152,12 +190,9 @@ class Invertory {
         if (Global.Game.items[itemid].equipPosition === undefined) {
             return false;
         }
-        for (var id in this.items) {
-            var item = this.items[id];
-            if(item.itemid === itemid) {
-                this.equipId(id, Global.Game.items[itemid].equipPosition);
-                return true;
-            }
+        for (var item of this.getItemsByItemid(itemid)) {
+            this.equipId(id, Global.Game.items[itemid].equipPosition);
+            return true;
         }
         return false;
     }
@@ -167,11 +202,8 @@ class Invertory {
      * @param {String} itemid 
      */
     unequipItem(itemid) {
-        for (var id in this.items) {
-            var item = this.items[id];
-            if(item.itemid === itemid) {
-                this.unequipId(id);
-            }
+        for (var item of this.getItemsByItemid(itemid)) {
+            this.unequipId(id);
         }
     }
 

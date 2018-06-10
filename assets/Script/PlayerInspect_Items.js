@@ -19,13 +19,11 @@ cc.Class({
     },
 
     loadItems() {
-        var items = Global.Player.invertory.items;
+        var items = Global.Player.invertory.getItemsInArray();
         var defaultItemIcon = this.defaultItemIcon;
-        for(var k in items) {
+        for(var item of items) {
             var sprite = cc.instantiate(this.ItemIcon);
-            sprite.getComponent("ItemIcon").itemid = k;
-            sprite.getComponent("ItemIcon").ItemDetailsScroll = this.ItemDetailsScroll;
-            sprite.getComponent("ItemIcon").quantity = items[k];
+            sprite.getComponent("ItemIcon").setProperties(item.id, this.ItemDetailsScroll)
             cc.find('Canvas/layout_grid').addChild(sprite);
         }
     },

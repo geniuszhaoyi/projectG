@@ -3,6 +3,7 @@ var Game = require('Game/Game.js')
 var Player = require('Player/Player.js')
 var table = require('Game/Numbers/tables')
 var Calculator = require('Game/Numbers/Calculator')
+var Invertory = require('Player/Invertory');
 
 cc.Class({
     extends: cc.Component,
@@ -27,7 +28,10 @@ cc.Class({
             this.createLabel(table.attribute[i] + ": ", Global.Player.attributes[i]);
         }
         this.createLabel('', '');
-        var derivedAttributes = Calculator.getDerivedAttributes(Global.Player.attributes, Global.Player.invertory.equipments)
+        var derivedAttributes = Calculator.getDerivedAttributes(
+            Global.Player.attributes, 
+            Global.Player.invertory.getItemsInArray().map(item => Invertory.extendItem(item))
+        );
         for(var i in table.derivedAttribute) {
             this.createLabel(table.derivedAttribute[i] + ": ", derivedAttributes[i]);
         }
