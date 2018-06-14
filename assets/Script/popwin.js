@@ -48,13 +48,13 @@ cc.Class({
         this.node.parent.getComponent('mask').closeMask();
         this.node.removeFromParent();
     },
-    initPop(popInfo){
-        console.log(popInfo.actions);
-        this.head.string=popInfo.name;
-        this.describe.string=popInfo.describe;
+    initPop(npc){
+        console.log(npc.actions);
+        this.head.string=npc.name;
+        this.describe.string=npc.describe;
         var tmp=this.node.getChildByName("action_layout");
-        console.log(tmp);
-        tmp.getComponent('action_layout').loadbtn(popInfo.actions);
+        //console.log(tmp);
+        tmp.getComponent('action_layout').loadbtn(npc.actions);
     },
     // update (dt) {},
 });
