@@ -4,6 +4,11 @@ var Item = require("Item");
 var Background = require("Background");
 var Npc_001 = require("npcs/Npc_001");
 var Npc_Item = require("npcs/Npc_Item");
+var Enemy = require("Enemy");
+var Skill = require("Skill");
+var Skill_001 = require("skills/Skill_001");
+var Buff = require("Buff");
+var Buff_001 = require("buffs/Buff_001");
 
 class Game {
     cities = {
@@ -25,7 +30,16 @@ class Game {
         npc_001: new Npc_001(),
         npc_002: new Npc_Item('npc_002', {name: 'Old Well', description: 'It has been abandon for years. Looks like something is down there. '}, 'city_003', 'weapon_001', 1),
     }
-    constructor() {
+    enemies = {
+        enemy_001: new Enemy([10, 1000, 0, 0, 0, 0, 1000, 0, 0], ['skill_001']),
+    }
+    skills = {
+        skill_melee: new Skill('skill_melee', 'skill_melee', 'skill_melee', 0, 0, 0, 0, 0, 0, []),
+        skill_001: new Skill_001(),
+        skill_002: new Skill('skill_002', 'fire ball', 'fire ball', 80, 0, 100, 100, 100, 50, ['buff_001']),
+    }
+    buffs = {
+        buff_001: new Buff('buff_001', 'burning', 'Burning. ', 0, 100, 5, [0, 0, 0, 0, 0, 0, 0, 0, 0]),
     }
 }
 
