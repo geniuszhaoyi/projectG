@@ -61,12 +61,12 @@ class Battle {
                 var ski = Battle.getRndInteger(0, this.player.skills.length);
                 console.log(this.player.skills, ski)
                 var res = this.player.skills[ski].cast();
-                this.pushBattleEvent({ event: 'skill', from: 'player', res: res });
+                this.pushBattleEvent({ event: 'skill', from: 'player', skill: this.player.skills[ski].skill.id, res: res });
             } else {
                 var ski = Battle.getRndInteger(0, this.enemy.skills.length);
                 console.log(this.enemy.skills, ski)
                 var res = this.enemy.skills[ski].cast();
-                this.pushBattleEvent({ event: 'skill', from: 'enemy', res: res });
+                this.pushBattleEvent({ event: 'skill', from: 'enemy', skill: this.enemy.skills[ski].skill.id, res: res });
             }
             // check wins
             if (this.checkWins()) break;
@@ -75,12 +75,12 @@ class Battle {
                 var ski = Battle.getRndInteger(0, this.player.skills.length);
                 console.log(this.player.skills, ski)
                 var res = this.player.skills[ski].cast();
-                this.pushBattleEvent({ event: 'skill', from: 'player', res: res });
+                this.pushBattleEvent({ event: 'skill', from: 'player', skill: this.player.skills[ski].skill.id, res: res });
             } else {
                 var ski = Battle.getRndInteger(0, this.enemy.skills.length);
                 console.log(this.enemy.skills, ski)
                 var res = this.enemy.skills[ski].cast();
-                this.pushBattleEvent({ event: 'skill', from: 'enemy', res: res });
+                this.pushBattleEvent({ event: 'skill', from: 'enemy', skill: this.enemy.skills[ski].skill.id, res: res });
             }
             // check wins
             if (this.checkWins()) break;
@@ -148,6 +148,7 @@ class Entity {
             this.originDerivedAttributes[i] = derivedAttributes[i];
         }
         skills.map(skill => this.skills.push(new SkillEntity(skill, this)));
+        console.log(skills, this.skills);
         if(this.skills.length === 0) this.skills.push(new SkillEntity('skill_melee', this));
         this.hp = hp;
         this.mp = mp;

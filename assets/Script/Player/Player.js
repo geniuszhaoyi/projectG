@@ -11,7 +11,7 @@ class Player {
         this.npcStatus[key] = value;
     }
 
-    attributes = [0, 100, 0, 0, 0, 0, 1000, 0];
+    attributes = [0, 100, 0, 0, 0, 0, 800, 900];
 
     invertory = new Invertory();
 

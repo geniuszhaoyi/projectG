@@ -27,10 +27,12 @@ class Skill {
             var attack = that.me.derivedAttributes[2] * this.strengthAttack * ((Math.random() * 2 - 1) * 0.1 + 1);
             attack += (isCritical ? that.me.derivedAttributes[2] * this.strengthAttack * 1.0 : 0);
             attack -= that.enemy.derivedAttributes[4];
+            if(attack < 0) attack = 0;
             if(that.me.derivedAttributes[2] * this.strengthAttack > 0 && attack < 1) attack = 1;
             var magic = that.me.derivedAttributes[3] * this.strengthMagic * ((Math.random() * 2 - 1) * 0.2 + 1);
             magic += (isCritical ? that.me.derivedAttributes[3] * this.strengthMagic * 1.2 : 0);
             magic -= that.enemy.derivedAttributes[5];
+            if(magic < 0) magic = 0;
             if(that.me.derivedAttributes[3] * this.strengthMagic > 0 && magic < 1) magic = 1;
 
             var buffList = [];
@@ -59,6 +61,7 @@ class Skill {
             var attack = that.me.derivedAttributes[2] * ((Math.random() * 2 - 1) * 0.1 + 1);
             attack += (isCritical ? that.me.derivedAttributes[2] * 0.6 : 0);
             attack -= that.enemy.derivedAttributes[4];
+            if(attack < 0) attack = 0;
             if(that.me.derivedAttributes[2] > 0 && attack < 1) attack = 1;
             var magic = 0
 
