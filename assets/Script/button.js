@@ -66,12 +66,12 @@ cc.Class({
 
         
         //获取view路径下是否已经有popup窗口
-        var tmp=cc.find("Canvas/sidebar/sidebar_top/view/popup");
+        var tmp=cc.find("Canvas/sidebar/sidebar_top/view");
 
         //但没有popup窗口时创建一个popup窗口
        // if(tmp==null){
 
-            tmp=cc.find("Canvas/sidebar/sidebar_top/view");
+            
             var newpop=cc.instantiate(this.popPre);
             var newmask=cc.instantiate(this.maskPre);
             console.log(newpop);

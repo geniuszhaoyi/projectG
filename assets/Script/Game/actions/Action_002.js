@@ -18,7 +18,7 @@ class Action_002 extends Action{
     _callback(message) {
         if(message === true || message === "true") {
             Global.Player.setNpcStatus("key_001_pickedup", true);
-            Global.Player.giveItem("key_001", 1);
+            Global.Player.invertory.giveItem("key_001", 1);
         }
         return true;
     }

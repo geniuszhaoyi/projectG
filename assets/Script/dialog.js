@@ -50,6 +50,9 @@ cc.Class({
         this.content.string=content.context;
     },
     closeDialog(){
+        var actlay=cc.find("Canvas/sidebar/sidebar_top/view/mask/popup/action_layout");
+        //console.log(actlay);
+        actlay.getComponent('action_layout').setbtn();
         this.node.removeFromParent();
     },
     // update (dt) {},
