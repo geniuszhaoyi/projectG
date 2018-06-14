@@ -1,5 +1,6 @@
 var Global = require('./../Global').storage;
 var Invertory = require('Invertory');
+var Skillset = require('Skillset');
 
 class Player {
     npcStatus = {}
@@ -10,9 +11,11 @@ class Player {
         this.npcStatus[key] = value;
     }
 
-    attributes = [0, 100, 0, 0, 0, 0, 1000, 0];
+    attributes = [0, 100, 0, 0, 0, 0, 800, 900];
 
     invertory = new Invertory();
+
+    skillset = new Skillset();
 
     currentCity = "city_001";
     visibleCities = {"city_001": true};
