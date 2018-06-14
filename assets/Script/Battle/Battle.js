@@ -29,14 +29,14 @@ class Battle {
     battleEvents = [];
     autoBattle() {
         for (var round = 0; ; round++) {
-            this.battleEvents.push({ event: 'new round', round: round });
+            this.pushBattleEvent({ event: 'new round', round: round });
             // cal buff
             this.player.resetDerivedAttributes();
             for (var buffid in this.player.buffs) {
                 var buff = this.player.buffs[buffid];
                 var res = buff.cast();
                 buff.ttl -= 1;
-                this.battleEvents.push({ event: 'buff', target: 'player', ttl: ttl, res: res });
+                this.pushBattleEvent({ event: 'buff', target: 'player', ttl: ttl, res: res });
                 if (buff.ttl === 0) delete this.player.buffs[buffid];
             }
             this.enemy.resetDerivedAttributes();
@@ -44,7 +44,7 @@ class Battle {
                 var buff = this.enemy.buffs[buffid];
                 var res = buff.cast();
                 buff.ttl -= 1;
-                this.battleEvents.push({ event: 'buff', target: 'enemy', ttl: ttl, res: res });
+                this.pushBattleEvent({ event: 'buff', target: 'enemy', ttl: ttl, res: res });
                 if (buff.ttl === 0) delete this.enemy.buffs[buffid];
             }
             // check wins
@@ -61,12 +61,12 @@ class Battle {
                 var ski = Battle.getRndInteger(0, this.player.skills.length);
                 console.log(this.player.skills, ski)
                 var res = this.player.skills[ski].cast();
-                this.battleEvents.push({ event: 'skill', from: 'player', res: res });
+                this.pushBattleEvent({ event: 'skill', from: 'player', res: res });
             } else {
                 var ski = Battle.getRndInteger(0, this.enemy.skills.length);
                 console.log(this.enemy.skills, ski)
                 var res = this.enemy.skills[ski].cast();
-                this.battleEvents.push({ event: 'skill', from: 'enemy', res: res });
+                this.pushBattleEvent({ event: 'skill', from: 'enemy', res: res });
             }
             // check wins
             if (this.checkWins()) break;
@@ -75,12 +75,12 @@ class Battle {
                 var ski = Battle.getRndInteger(0, this.player.skills.length);
                 console.log(this.player.skills, ski)
                 var res = this.player.skills[ski].cast();
-                this.battleEvents.push({ event: 'skill', from: 'player', res: res });
+                this.pushBattleEvent({ event: 'skill', from: 'player', res: res });
             } else {
                 var ski = Battle.getRndInteger(0, this.enemy.skills.length);
                 console.log(this.enemy.skills, ski)
                 var res = this.enemy.skills[ski].cast();
-                this.battleEvents.push({ event: 'skill', from: 'enemy', res: res });
+                this.pushBattleEvent({ event: 'skill', from: 'enemy', res: res });
             }
             // check wins
             if (this.checkWins()) break;
@@ -91,18 +91,29 @@ class Battle {
         var isdeadPlayer = this.player.hp <= 0;
         var isdeadEnemy = this.enemy.hp <= 0;
         if (isdeadPlayer && isdeadEnemy) {
-            this.battleEvents.push({ event: 'wins', winner: 'draw' });
+            this.pushBattleEvent({ event: 'wins', winner: 'draw' });
             return true;
         }
         if (isdeadPlayer) {
-            this.battleEvents.push({ event: 'wins', winner: 'enemy' });
+            this.pushBattleEvent({ event: 'wins', winner: 'enemy' });
             return true;
         }
         if (isdeadEnemy) {
-            this.battleEvents.push({ event: 'wins', winner: 'player' });
+            this.pushBattleEvent({ event: 'wins', winner: 'player' });
             return true;
         }
         return false;
+    }
+    pushBattleEvent(event) {
+        event.currentStatus = {
+            player: {
+                hp: this.player.hp,
+            },
+            enemy: {
+                hp: this.enemy.hp,
+            }
+        }
+        this.battleEvents.push(event);
     }
     static getRndInteger(min, max) {
         return Math.floor(Math.random() * (max - min)) + min;
