@@ -30,7 +30,11 @@ class Skill_001 extends Skill {
             status: 'hit',
             attack: 0,
             magic: 0,
-            message: 'Burned ' + damage + ' mana, deal ' + damage + ' damage. ',
+            specialEffect: {
+                type: 'burn mana and cause damage',
+                manaBurned: damage,
+                attack: damage,
+            },
             enemyBuffs: [],
         }
     }
