@@ -29,7 +29,7 @@ class Skill_001 extends Skill {
             status: 'hit',
             attack: 0,
             magic: damage,
-            message: '燃烧了' + damage + '点魔法',
+            message: '燃烧了<color=#7CAEFF>' + damage + '</color>点魔法',
             enemyBuffs: ['buff_001'],
         }
     }
