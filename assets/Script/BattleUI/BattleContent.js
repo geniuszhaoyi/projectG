@@ -57,6 +57,7 @@ cc.Class({
         this.playerHp=cc.find("Canvas/Allhp");
         this.enemyHp=cc.find("Canvas/enhp");
         console.log(this.battle);
+        this.count = 100;
         //  while(this.battle.hasNext()) {
         //      var event = this.battle.next();
         //      console.log(event);
@@ -67,6 +68,7 @@ cc.Class({
 
     },
     reFormString(event){
+        console.log(event);
         var result="";
         switch(event.event){
             case "wins":
@@ -85,7 +87,10 @@ cc.Class({
                 if(event.res.status=="hit"){
                     result+="，"+"精准的命中了"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>";
                     result+="";
-                }else{
+                }else if(event.res.status=="critical"){
+                    result+="，"+"命中了要害，对"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"造成了大量伤害";
+                }
+                else{
                     result+="，"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"很灵巧的躲了过去";
                 }
                 break;
