@@ -49,6 +49,7 @@ cc.Class({
         enemyHp:null,
         playerMp:null,
         enemyMp:null,
+        skillfresh:true,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -139,6 +140,40 @@ cc.Class({
         }
         return result;
     },
+
+    loadSkill(curstats){
+        var pSlist=curstats.player.skills;
+        console.log(pSlist);
+        var eSlist=curstats.enemy.skills;
+        for(var i in pSlist){
+            var skill=new cc.Node();
+            
+            skill.addComponent(cc.Sprite);
+            cc.loader.loadRes("Texture/Item/" + pSlist[i].skill.id + "", function(err, data) {
+                this.spriteFrame = new cc.SpriteFrame(data);
+                }.bind(skill.getComponent(cc.Sprite)));
+            skill.getComponent(cc.Sprite).sizeMode=cc.Sprite.SizeMode.CUSTOM;
+            cc.find("Canvas/playerSkillLayout").addChild(skill);
+            skill.height=75;
+            skill.width=75;
+        }
+        for(var i in eSlist){
+            var skill=new cc.Node();
+            
+            skill.addComponent(cc.Sprite);
+            cc.loader.loadRes("Texture/Item/" + eSlist[i].skill.id + "", function(err, data) {
+                this.spriteFrame = new cc.SpriteFrame(data);
+                }.bind(skill.getComponent(cc.Sprite)));
+            skill.getComponent(cc.Sprite).sizeMode=cc.Sprite.SizeMode.CUSTOM;
+            cc.find("Canvas/enemySkillLayout").addChild(skill);
+            skill.height=75;
+            skill.width=75;
+        }
+       
+        
+    },
+
+
     update (dt) {
         this.count++;
         //console.log(dt);
@@ -146,6 +181,12 @@ cc.Class({
 
             this.count=0;
             var battleinfo=this.battle.next();
+
+            if(this.skillfresh){
+                this.skillfresh=false;
+                this.loadSkill(battleinfo.currentStatus);
+
+            }
             var cont=cc.find("Canvas/scrollview/view/content");
             if(battleinfo.event=="new round"&&battleinfo.round!=0){
                 var block=new cc.Node();
