@@ -31,7 +31,7 @@ class Game {
         npc_002: new Npc_Item('npc_002', {name: 'Old Well', description: 'It has been abandon for years. Looks like something is down there. '}, 'city_003', 'weapon_001', 1),
     }
     enemies = {
-        enemy_001: new Enemy([2000, 1000, 0, 0, 0, 0, 1000, 0, 0], ['skill_001']),
+        enemy_001: new Enemy([150, 1000, 0, 0, 0, 0, 1000, 0, 0], ['skill_001']),
     }
     skills = {
         skill_melee: new Skill('skill_melee', 'skill_melee', 'skill_melee', 0, 0, 0, 0, 0, 0, []),
