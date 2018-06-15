@@ -41,9 +41,11 @@ cc.Class({
             default:null,
             type:cc.Prefab,
         },
-        count:0,
+        count:51,
         num:0,
         battle:null,
+        playerHp:null,
+        enemyHp:null,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -52,6 +54,8 @@ cc.Class({
         Global.Game = new Game();
         Global.Player = new Player();
         this.battle = new Battle(Global.Player, Global.Game.enemies['enemy_001']);
+        this.playerHp=cc.find("Canvas/Allhp");
+        this.enemyHp=cc.find("Canvas/enhp");
         console.log(this.battle);
         //  while(this.battle.hasNext()) {
         //      var event = this.battle.next();
@@ -85,6 +89,14 @@ cc.Class({
                     result+="，"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"很灵巧的躲了过去";
                 }
                 break;
+        }
+        if(event.event=="new round"&&event.round==0){
+            this.playerHp.getComponent('HpUI').initHp(event.currentStatus.player.hp,event.currentStatus.player.hp);
+            this.enemyHp.getComponent('HpUI').initHp(event.currentStatus.enemy.hp,event.currentStatus.enemy.hp);
+        }
+        else{
+            this.playerHp.getComponent('HpUI').setCurHp(event.currentStatus.player.hp);
+            this.enemyHp.getComponent('HpUI').setCurHp(event.currentStatus.enemy.hp);
         }
         return result;
     },
