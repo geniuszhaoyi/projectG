@@ -3,6 +3,8 @@ var Invertory = require('Invertory');
 var Skillset = require('Skillset');
 
 class Player {
+    name = "玩家";
+
     npcStatus = {}
     getNpcStatus(key) {
         return this.npcStatus[key];
