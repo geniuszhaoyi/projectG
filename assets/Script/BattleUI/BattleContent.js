@@ -47,6 +47,8 @@ cc.Class({
         battle:null,
         playerHp:null,
         enemyHp:null,
+        playerMp:null,
+        enemyMp:null,
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -57,6 +59,8 @@ cc.Class({
         this.battle = new Battle(Global.Player, Global.Game.enemies['enemy_001']);
         this.playerHp=cc.find("Canvas/Allhp");
         this.enemyHp=cc.find("Canvas/enhp");
+        this.playerMp=cc.find("Canvas/playerMp");
+        this.enemyMp=cc.find("Canvas/enMp");
         console.log(this.battle);
         this.count = 100;
         //  while(this.battle.hasNext()) {
@@ -85,9 +89,15 @@ cc.Class({
             case "skill":
                 console.log(Global.Game.skills);
                 result+="<color="+(event.from=="player"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"释放"+"<color=#17AC54>"+Global.Game.skills[event.skill].name+"</color>";
+                
                 if(event.res.message!=undefined){
-                    result+="，"+event.res.message;
+                    result+="，"+event.res.message+"，使"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"受到了<color=#FF1D2B>";
+                    if(event.res.attack!=0)
+                        result+=parseInt(event.res.attack,10)+"</color>点物理伤害";
+                    else
+                        result+=parseInt(event.res.magic,10)+"</color>点魔法伤害";
                 }else
+                
                 if(event.res.status=="hit"){
                     result+="，"+"精准的命中了"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"，使其受到了<color=#FF1D2B>";
                     if(event.res.attack!=0)
@@ -106,21 +116,26 @@ cc.Class({
                 }
                 break;
             case "buff":
-                result+=Global.Game.buffs[event.buff]+"使"+"<color="+(event.target=="player"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"受到了";
+                result+=Global.Game.buffs[event.buff].name+"使"+"<color="+(event.target=="player"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"受到了";
                 if(event.res.attack!=0){
                     result+=parseInt(event.res.attack,10)+"</color>点物理伤害";
                 }else{
                     result+=parseInt(event.res.magic,10)+"</color>点魔法伤害";
                 }
+                result+="，剩余<color=#88d8ba>"+event.ttl+"</color>回合";
                 break;
         }
         if(event.event=="new round"&&event.round==0){
             this.playerHp.getComponent('HpUI').initHp(event.currentStatus.player.hp,event.currentStatus.player.hp);
             this.enemyHp.getComponent('HpUI').initHp(event.currentStatus.enemy.hp,event.currentStatus.enemy.hp);
+            this.playerMp.getComponent('HpUI').initHp(event.currentStatus.player.mp,event.currentStatus.player.mp);
+            this.enemyMp.getComponent('HpUI').initHp(event.currentStatus.enemy.mp,event.currentStatus.enemy.mp);
         }
         else{
             this.playerHp.getComponent('HpUI').setCurHp(event.currentStatus.player.hp);
             this.enemyHp.getComponent('HpUI').setCurHp(event.currentStatus.enemy.hp);
+            this.playerMp.getComponent('HpUI').setCurHp(event.currentStatus.player.mp);
+            this.enemyMp.getComponent('HpUI').setCurHp(event.currentStatus.enemy.mp);
         }
         return result;
     },
@@ -130,12 +145,19 @@ cc.Class({
         if(this.count>50&&this.battle.hasNext()){
 
             this.count=0;
-
+            var battleinfo=this.battle.next();
             var cont=cc.find("Canvas/scrollview/view/content");
+            if(battleinfo.event=="new round"&&battleinfo.round!=0){
+                var block=new cc.Node();
+                block.height=12.5;
+                block.width=20;
+                cont.addChild(block);
+            }
             var newText=cc.instantiate(this.context);
 
             cont.addChild(newText);
-            newText.getComponent(cc.RichText).string=this.reFormString(this.battle.next());
+
+            newText.getComponent(cc.RichText).string=this.reFormString(battleinfo);
 
             var scroll=cc.find("Canvas/scrollview");
             scroll.getComponent(cc.ScrollView).scrollToBottom(0.001);
