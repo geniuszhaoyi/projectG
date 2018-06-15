@@ -25,13 +25,12 @@ class Skill_001 extends Skill {
         } else {
             that.enemy.mp -= damage;
         }
-        that.enemy.hp -= damage;        
         return {
             status: 'hit',
             attack: 0,
-            magic: 0,
-            message: '燃烧了<color=#FF1D2B>' + damage + '</color>点魔法，造成了<color=#FF1D2B>' + damage + '</color>点伤害',
-            enemyBuffs: [],
+            magic: damage,
+            message: '燃烧了<color=#7CAEFF>' + damage + '</color>点魔法',
+            enemyBuffs: ['buff_001'],
         }
     }
 }
