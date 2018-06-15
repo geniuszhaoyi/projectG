@@ -163,12 +163,16 @@ class Entity {
     skills = [];
     buffs = {};
     getCurrentEntity() {
+        var buffs = {};
+        for(var k in this.buffs) if(this.buffs.hasOwnProperty(k)) {
+            buffs[k] = this.buffs[k];
+        }
         return {
             hp: this.hp,
             mp: this.mp,
             derivedAttributes: this.derivedAttributes.slice(),
             skills: this.skills.slice(),
-            buffs: this.buffs.slice(),
+            buffs: buffs,
         }
     }
     resetDerivedAttributes() {
