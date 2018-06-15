@@ -106,12 +106,8 @@ class Battle {
     }
     pushBattleEvent(event) {
         event.currentStatus = {
-            player: {
-                hp: this.player.hp,
-            },
-            enemy: {
-                hp: this.enemy.hp,
-            }
+            player: this.player.getCurrentEntity(),
+            enemy: this.enemy.getCurrentEntity(),
         }
         this.battleEvents.push(event);
     }
@@ -167,7 +163,13 @@ class Entity {
     skills = [];
     buffs = {};
     getCurrentEntity() {
-
+        return {
+            hp: this.hp,
+            mp: this.mp,
+            derivedAttributes: this.derivedAttributes.slice(),
+            skills: this.skills.slice(),
+            buffs: this.buffs.slice(),
+        }
     }
     resetDerivedAttributes() {
         for (var i in this.derivedAttributes) {
