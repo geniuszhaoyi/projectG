@@ -36,7 +36,7 @@ class Battle {
                 var buff = this.player.buffs[buffid];
                 var res = buff.cast();
                 buff.ttl -= 1;
-                this.pushBattleEvent({ event: 'buff', target: 'player', ttl: ttl, res: res });
+                this.pushBattleEvent({ event: 'buff', target: 'player', ttl: buff.ttl, res: res });
                 if (buff.ttl === 0) delete this.player.buffs[buffid];
             }
             this.enemy.resetDerivedAttributes();
@@ -59,12 +59,10 @@ class Battle {
             // first attack
             if (playerFirst) {
                 var ski = Battle.getRndInteger(0, this.player.skills.length);
-                console.log(this.player.skills, ski)
                 var res = this.player.skills[ski].cast();
                 this.pushBattleEvent({ event: 'skill', from: 'player', skill: this.player.skills[ski].skill.id, res: res });
             } else {
                 var ski = Battle.getRndInteger(0, this.enemy.skills.length);
-                console.log(this.enemy.skills, ski)
                 var res = this.enemy.skills[ski].cast();
                 this.pushBattleEvent({ event: 'skill', from: 'enemy', skill: this.enemy.skills[ski].skill.id, res: res });
             }
@@ -73,12 +71,10 @@ class Battle {
             // second attack
             if (playerFirst === false) {
                 var ski = Battle.getRndInteger(0, this.player.skills.length);
-                console.log(this.player.skills, ski)
                 var res = this.player.skills[ski].cast();
                 this.pushBattleEvent({ event: 'skill', from: 'player', skill: this.player.skills[ski].skill.id, res: res });
             } else {
                 var ski = Battle.getRndInteger(0, this.enemy.skills.length);
-                console.log(this.enemy.skills, ski)
                 var res = this.enemy.skills[ski].cast();
                 this.pushBattleEvent({ event: 'skill', from: 'enemy', skill: this.enemy.skills[ski].skill.id, res: res });
             }
@@ -144,7 +140,6 @@ class Entity {
             this.originDerivedAttributes[i] = derivedAttributes[i];
         }
         skills.map(skill => this.skills.push(new SkillEntity(skill, this)));
-        console.log(skills, this.skills);
         if(this.skills.length === 0) this.skills.push(new SkillEntity('skill_melee', this));
         this.hp = hp;
         this.mp = mp;

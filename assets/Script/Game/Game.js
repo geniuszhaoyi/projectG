@@ -34,12 +34,12 @@ class Game {
         enemy_001: new Enemy([150, 1000, 0, 0, 0, 0, 1000, 0, 0], ['skill_001']),
     }
     skills = {
-        skill_melee: new Skill('skill_melee', 'skill_melee', 'skill_melee', 0, 0, 0, 0, 0, 0, []),
+        skill_melee: new Skill('skill_melee', '普通攻击', '技能没了，那还能怎么办呢', 0, 0, 0, 0, 0, 0, []),
         skill_001: new Skill_001('skill_001'),
         skill_002: new Skill('skill_002', 'fire ball', 'fire ball', 80, 0, 100, 100, 100, 50, ['buff_001']),
     }
     buffs = {
-        buff_001: new Buff('buff_001', 'burning', 'Burning. ', 0, 100, 5, [0, 0, 0, 0, 0, 0, 0, 0, 0]),
+        buff_001: new Buff('buff_001', 'burning', 'Burning. ', 0, 0.1, 5, [0, 0, 0, 0, 0, 0, 0, 0, 0]),
     }
 }
 
