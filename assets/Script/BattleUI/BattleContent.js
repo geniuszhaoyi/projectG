@@ -84,11 +84,14 @@ cc.Class({
             case "skill":
                 console.log(Global.Game.skills);
                 result+="<color="+(event.from=="player"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"释放"+"<color=#17AC54>"+Global.Game.skills[event.skill].name+"</color>";
+                if(event.res.message!=undefined){
+                    result+="，"+event.res.message;
+                }else
                 if(event.res.status=="hit"){
-                    result+="，"+"精准的命中了"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>";
+                    result+="，"+"精准的命中了"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"，使其受到了<color=#FF1D2B>"+parseInt(event.res.attack,10)+"</color>点伤害";
                     result+="";
                 }else if(event.res.status=="critical"){
-                    result+="，"+"命中了要害，对"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"造成了大量伤害";
+                    result+="，"+"命中了要害，对"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"造成了<color=#FF1D2B>"+parseInt(event.res.attack,10)+"</color>点伤害";
                 }
                 else{
                     result+="，"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"很灵巧的躲了过去";
