@@ -17,6 +17,7 @@ var Battle = require('Battle/Battle.js');
 // skill name using color #17AC54
 // win color #EAF23B
 // damage color #FF1D2B
+// magic color #7caeff
 
 cc.Class({
     extends: cc.Component,
@@ -88,13 +89,28 @@ cc.Class({
                     result+="，"+event.res.message;
                 }else
                 if(event.res.status=="hit"){
-                    result+="，"+"精准的命中了"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"，使其受到了<color=#FF1D2B>"+parseInt(event.res.attack,10)+"</color>点伤害";
-                    result+="";
+                    result+="，"+"精准的命中了"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"，使其受到了<color=#FF1D2B>";
+                    if(event.res.attack!=0)
+                        result+=parseInt(event.res.attack,10)+"</color>点物理伤害";
+                    else
+                        result+=parseInt(event.res.magic,10)+"</color>点魔法伤害";
                 }else if(event.res.status=="critical"){
-                    result+="，"+"命中了要害，对"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"造成了<color=#FF1D2B>"+parseInt(event.res.attack,10)+"</color>点伤害";
+                    result+="，"+"命中了要害，对"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>";
+                    if(event.res.attack!=0)
+                        result+="造成了<color=#FF1D2B>"+parseInt(event.res.attack,10)+"</color>点物理伤害";
+                    else
+                        result+="造成了<color=#FF1D2B>"+parseInt(event.res.magic,10)+"</color>点魔法伤害";
                 }
                 else{
                     result+="，"+"<color="+(event.from=="enemy"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"很灵巧的躲了过去";
+                }
+                break;
+            case "buff":
+                result+=Global.Game.buffs[event.buff]+"使"+"<color="+(event.target=="player"?"#3933FF>玩家":"#F57C22>敌人")+"</color>"+"受到了";
+                if(event.res.attack!=0){
+                    result+=parseInt(event.res.attack,10)+"</color>点物理伤害";
+                }else{
+                    result+=parseInt(event.res.magic,10)+"</color>点魔法伤害";
                 }
                 break;
         }
