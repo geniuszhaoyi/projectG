@@ -36,7 +36,7 @@ class Battle {
                 var buff = this.player.buffs[buffid];
                 var res = buff.cast();
                 buff.ttl -= 1;
-                this.pushBattleEvent({ event: 'buff', target: 'player', ttl: buff.ttl, res: res });
+                this.pushBattleEvent({ event: 'buff', target: 'player', buff: buffid, ttl: buff.ttl, res: res });
                 if (buff.ttl === 0) delete this.player.buffs[buffid];
             }
             this.enemy.resetDerivedAttributes();
@@ -44,7 +44,7 @@ class Battle {
                 var buff = this.enemy.buffs[buffid];
                 var res = buff.cast();
                 buff.ttl -= 1;
-                this.pushBattleEvent({ event: 'buff', target: 'enemy', ttl: ttl, res: res });
+                this.pushBattleEvent({ event: 'buff', target: 'enemy', buff: buffid, ttl: buff.ttl, res: res });
                 if (buff.ttl === 0) delete this.enemy.buffs[buffid];
             }
             // check wins
