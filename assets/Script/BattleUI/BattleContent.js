@@ -172,7 +172,53 @@ cc.Class({
        
         
     },
-
+    loadBuff(curstats){
+        var pBlist=curstats.player.buffs;
+        console.log(pBlist);
+        var eBlist=curstats.enemy.buffs;
+        var pblayout=cc.find("Canvas/playerBuffLayout");
+        var eblayout=cc.find("Canvas/enemyBuffLayout");
+        pblayout.removeAllChildren();
+        eblayout.removeAllChildren();
+        for(var i in pBlist){
+            var buff=new cc.Node();
+            
+            buff.addComponent(cc.Sprite);
+            cc.loader.loadRes("Texture/Item/" + pBlist[i].buff.id + "", function(err, data) {
+                this.spriteFrame = new cc.SpriteFrame(data);
+                }.bind(buff.getComponent(cc.Sprite)));
+            buff.getComponent(cc.Sprite).sizeMode=cc.Sprite.SizeMode.CUSTOM;
+            var ttl=new cc.Node();
+            ttl.addComponent(cc.Label);
+            ttl.getComponent(cc.Label).string=pBlist[i].ttl;
+            ttl.color=new cc.Color(0,0,0);
+            buff.addChild(ttl);
+            ttl.x=20;
+            ttl.y=-20
+            pblayout.addChild(buff);
+            buff.height=75;
+            buff.width=75;
+        }
+        for(var i in eBlist){
+            var buff=new cc.Node();
+            
+            buff.addComponent(cc.Sprite);
+            cc.loader.loadRes("Texture/Item/" + eBlist[i].buff.id + "", function(err, data) {
+                this.spriteFrame = new cc.SpriteFrame(data);
+                }.bind(buff.getComponent(cc.Sprite)));
+            buff.getComponent(cc.Sprite).sizeMode=cc.Sprite.SizeMode.CUSTOM;
+            var ttl=new cc.Node();
+            ttl.addComponent(cc.Label);
+            ttl.getComponent(cc.Label).string=eBlist[i].ttl;
+            ttl.color=new cc.Color(0,0,0);
+            buff.addChild(ttl);
+            ttl.x=20;
+            ttl.y=-20
+            eblayout.addChild(buff);
+            buff.height=75;
+            buff.width=75;
+        }
+    },
 
     update (dt) {
         this.count++;
@@ -187,6 +233,7 @@ cc.Class({
                 this.loadSkill(battleinfo.currentStatus);
 
             }
+            this.loadBuff(battleinfo.currentStatus);
             var cont=cc.find("Canvas/scrollview/view/content");
             if(battleinfo.event=="new round"&&battleinfo.round!=0){
                 var block=new cc.Node();
