@@ -49,10 +49,11 @@ cc.Class({
     initSW(content){
         this.act=content;
         this.content.string=this.act.context;
+        this.title.string=this.act.name;
     },
     closeSW(){
         var actlay=cc.find("Canvas/sidebar/sidebar_top/view/mask/popup/action_layout");
-        console.log(actlay);
+        //console.log(actlay);
         actlay.getComponent('action_layout').setbtn();
         this.node.removeFromParent();
     },

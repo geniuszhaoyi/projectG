@@ -27,34 +27,37 @@ cc.Class({
         //         this._bar = value;
         //     }
         // },
-        head:{
+        hpText:{
             default:null,
             type:cc.Label,
         },
-        describe:{
+        hpPic:{
             default:null,
-            type:cc.Label,
+            type:cc.Node,
         },
+        maxHp:0,
+        curHp:0,
     },
 
     // LIFE-CYCLE CALLBACKS:
-
+    initHp(maxHp,curHp){
+        this.maxHp=parseInt(maxHp,10);
+        this.curHp=parseInt(curHp,10);
+        this.hpText.string=""+this.curHp+"/"+this.maxHp;
+    },
     // onLoad () {},
+    setCurHp(hp){
+        hp=parseInt(hp,10);
+        if(hp<0)
+            hp=0;
+        this.curHp=hp;
+        this.hpText.string=""+this.curHp+"/"+this.maxHp;
+        this.hpPic.width=this.curHp/this.maxHp*230;
+    },
 
     start () {
 
     },
-    closePop(){
-        this.node.parent.getComponent('mask').closeMask();
-        this.node.removeFromParent();
-    },
-    initPop(npc){
-        console.log(npc.actions);
-        this.head.string=npc.name;
-        this.describe.string=npc.describe;
-        var tmp=this.node.getChildByName("action_layout");
-        //console.log(tmp);
-        tmp.getComponent('action_layout').loadbtn(npc.actions);
-    },
+
     // update (dt) {},
 });

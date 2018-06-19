@@ -36,7 +36,7 @@ class Battle {
                 var buff = this.player.buffs[buffid];
                 var res = buff.cast();
                 buff.ttl -= 1;
-                this.pushBattleEvent({ event: 'buff', target: 'player', ttl: ttl, res: res });
+                this.pushBattleEvent({ event: 'buff', target: 'player', buff: buffid, ttl: buff.ttl, res: res });
                 if (buff.ttl === 0) delete this.player.buffs[buffid];
             }
             this.enemy.resetDerivedAttributes();
@@ -44,7 +44,7 @@ class Battle {
                 var buff = this.enemy.buffs[buffid];
                 var res = buff.cast();
                 buff.ttl -= 1;
-                this.pushBattleEvent({ event: 'buff', target: 'enemy', ttl: ttl, res: res });
+                this.pushBattleEvent({ event: 'buff', target: 'enemy', buff: buffid, ttl: buff.ttl, res: res });
                 if (buff.ttl === 0) delete this.enemy.buffs[buffid];
             }
             // check wins
@@ -59,12 +59,10 @@ class Battle {
             // first attack
             if (playerFirst) {
                 var ski = Battle.getRndInteger(0, this.player.skills.length);
-                console.log(this.player.skills, ski)
                 var res = this.player.skills[ski].cast();
                 this.pushBattleEvent({ event: 'skill', from: 'player', skill: this.player.skills[ski].skill.id, res: res });
             } else {
                 var ski = Battle.getRndInteger(0, this.enemy.skills.length);
-                console.log(this.enemy.skills, ski)
                 var res = this.enemy.skills[ski].cast();
                 this.pushBattleEvent({ event: 'skill', from: 'enemy', skill: this.enemy.skills[ski].skill.id, res: res });
             }
@@ -73,12 +71,10 @@ class Battle {
             // second attack
             if (playerFirst === false) {
                 var ski = Battle.getRndInteger(0, this.player.skills.length);
-                console.log(this.player.skills, ski)
                 var res = this.player.skills[ski].cast();
                 this.pushBattleEvent({ event: 'skill', from: 'player', skill: this.player.skills[ski].skill.id, res: res });
             } else {
                 var ski = Battle.getRndInteger(0, this.enemy.skills.length);
-                console.log(this.enemy.skills, ski)
                 var res = this.enemy.skills[ski].cast();
                 this.pushBattleEvent({ event: 'skill', from: 'enemy', skill: this.enemy.skills[ski].skill.id, res: res });
             }
@@ -106,12 +102,8 @@ class Battle {
     }
     pushBattleEvent(event) {
         event.currentStatus = {
-            player: {
-                hp: this.player.hp,
-            },
-            enemy: {
-                hp: this.enemy.hp,
-            }
+            player: this.player.getCurrentEntity(),
+            enemy: this.enemy.getCurrentEntity(),
         }
         this.battleEvents.push(event);
     }
@@ -148,7 +140,6 @@ class Entity {
             this.originDerivedAttributes[i] = derivedAttributes[i];
         }
         skills.map(skill => this.skills.push(new SkillEntity(skill, this)));
-        console.log(skills, this.skills);
         if(this.skills.length === 0) this.skills.push(new SkillEntity('skill_melee', this));
         this.hp = hp;
         this.mp = mp;
@@ -167,7 +158,17 @@ class Entity {
     skills = [];
     buffs = {};
     getCurrentEntity() {
-
+        var buffs = {};
+        for(var k in this.buffs) if(this.buffs.hasOwnProperty(k)) {
+            buffs[k] = this.buffs[k];
+        }
+        return {
+            hp: this.hp,
+            mp: this.mp,
+            derivedAttributes: this.derivedAttributes.slice(),
+            skills: this.skills.slice(),
+            buffs: buffs,
+        }
     }
     resetDerivedAttributes() {
         for (var i in this.derivedAttributes) {
