@@ -42,7 +42,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 320,
-      "height": 60
+      "height": 70
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -73,7 +73,7 @@
     "_N$fontSize": 30,
     "_N$font": null,
     "_N$maxWidth": 320,
-    "_N$lineHeight": 30,
+    "_N$lineHeight": 35,
     "_N$imageAtlas": null,
     "_N$handleTouchEvent": true
   },
@@ -83,7 +83,7 @@
       "__id__": 1
     },
     "asset": {
-      "__id__": 0
+      "__uuid__": "5d1e93b6-eaa1-482f-989b-bc89c4484c4e"
     },
     "fileId": "ad0aJtabpDPLskmk7xd0ML",
     "sync": false

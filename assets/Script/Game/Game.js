@@ -4,6 +4,7 @@ var Item = require("Item");
 var Background = require("Background");
 var Npc_001 = require("npcs/Npc_001");
 var Npc_Item = require("npcs/Npc_Item");
+var Npc_Monster = require("npcs/Npc_Monster");
 var Enemy = require("Enemy");
 var Skill = require("Skill");
 var Skill_001 = require("skills/Skill_001");
@@ -30,7 +31,7 @@ class Game {
     npcs = {
         npc_001: new Npc_001(),
         npc_002: new Npc_Item('npc_002', {name: 'Old Well', description: 'It has been abandon for years. Looks like something is down there. '}, 'city_003', 'weapon_001', 1),
-        npc_003: new Npc_Monster('npc_003', {name: '哥布林', description: '一只看起来很弱的哥布林', enemy: 'enemy_001', drop: [{item: 'item_001', quantity: 1, possibility: 50}]}),
+        npc_003: new Npc_Monster('npc_003', {name: '哥布林', description: '一只看起来很弱的哥布林', enemyid: 'enemy_001', drop: [{item: 'item_001', quantity: 1, possibility: 50}]}),
     }
     enemies = {
         enemy_001: new Enemy([150, 1000, 0, 0, 0, 0, 1000, 0, 0], ['skill_001']),
@@ -42,6 +43,9 @@ class Game {
     }
     buffs = {
         buff_001: new Buff('buff_001', 'burning', 'Burning. ', 0, 0.1, 5, [0, 0, 0, 0, 0, 0, 0, 0, 0]),
+    }
+    battles = {
+        currentBattle:null,
     }
 }
 
