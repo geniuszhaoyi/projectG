@@ -4,7 +4,7 @@ var Global = require("./../../Global").storage;
 class Action_003 extends Action{
     id = "action_003";
     name = "search";
-    context = "It is empty now. "
+    context = {title: 'title', text: "It is empty now. "};
     isVisiable() {
         return Global.Player.getNpcStatus("key_001_pickedup") === true;
     }

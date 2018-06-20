@@ -44,6 +44,7 @@ cc.Class({
         this.maxHp=parseInt(maxHp,10);
         this.curHp=parseInt(curHp,10);
         this.hpText.string=""+this.curHp+"/"+this.maxHp;
+        this.hpPic.width=this.curHp/this.maxHp*230;
     },
     // onLoad () {},
     setCurHp(hp){

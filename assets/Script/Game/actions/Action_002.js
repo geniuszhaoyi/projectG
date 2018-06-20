@@ -4,7 +4,7 @@ var Global = require("./../../Global").storage;
 class Action_002 extends Action{
     id = "action_002";
     name = "search";
-    context = "You find a Rusky Key. Pick it up? "
+    context = {title: 'title', text: "You find a Rusky Key. Pick it up? "};
     isVisiable() {
         return Global.Player.getNpcStatus("key_001_pickedup") !== true;
     }

@@ -69,10 +69,18 @@ cc.Class({
                 stch.setPosition(0,-202);
                 break;
             case 'battle':
-                console.log("fight");
-                console.log(content);
-                Global.Game.battles.currentBattle=new Battle(Global.Player, Global.Game.enemies[content.enemy.enemyid]);
-                cc.director.loadScene('BattleScene');
+                var callback = function() {
+                    console.log("fight");
+                    console.log(content);
+                    Global.Memory.battles.currentBattle=new Battle(Global.Player, Global.Game.enemies[content.enemy.enemyid]);
+                    cc.director.loadScene('BattleScene');
+                }
+                console.log("talk");
+                var dia=cc.instantiate(this.diaPre);
+                cc.find("Canvas").addChild(dia);
+                content.localcallback = callback;
+                dia.getComponent('dialog').initdialog(content);
+                dia.setPosition(0,-202);
                 break;
             default:
                 console.log("ignore");

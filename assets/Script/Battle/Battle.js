@@ -82,6 +82,7 @@ class Battle {
             if (this.checkWins()) break;
             // end round
         }
+        this.apply();
     }
     checkWins() {
         var isdeadPlayer = this.player.hp <= 0;
@@ -118,15 +119,19 @@ class Battle {
     }
     applied = 'waiting';
     apply() {
-        if (applied === 'waiting') {
-            //this.Player
+        if (this.applied === 'waiting') {
+            this.Player.attributes[6] = this.player.hp;
+            this.Player.attributes[7] = this.player.hp;
+            this.applied = 'applied';
+            return true;
         } else {
             return false;
         }
     }
     discard() {
-        if (applied === 'waiting') {
-
+        if (this.applied === 'waiting') {
+            this.applied = 'discarded';
+            return true;
         } else {
             return false;
         }

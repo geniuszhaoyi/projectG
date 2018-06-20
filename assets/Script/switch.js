@@ -48,8 +48,8 @@ cc.Class({
     },
     initSW(content){
         this.act=content;
-        this.content.string=this.act.context;
-        this.title.string=this.act.name;
+        this.content.string=this.act.context.text;
+        this.title.string=this.act.context.title;
     },
     closeSW(){
         var actlay=cc.find("Canvas/sidebar/sidebar_top/view/mask/popup/action_layout");
