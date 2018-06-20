@@ -1,22 +1,26 @@
 var Npc = require ('./../Npc.js');
 var Action = require ('./../Action.js');
 
-class NpcEnemy extends Npc {
+class Npc_Monster extends Npc {
     constructor(id, enemy) {
+        console.log("hello     "+enemy);
         super(id, {name: enemy.name, description: enemy.description}, 'city_004');
-        this.actions = [new ActionEnemy()];
+        this.actions = [new ActionEnemy(id,enemy)];
+       
     }
 }
 
 class ActionEnemy extends Action {
-    constructor() {
-        super('NpcMonster' + id, '打他', '你打了一下哥布林，好像惹怒他了！');
+    constructor(id, enemy) {
+        
+        super('NpcMonster' +id, '打他', '你打了一下哥布林，好像惹怒他了！');
+        this.enemy=enemy
     }
     start() {
         return {
             context: {speaker: '', text: this.context},
             type: 'battle',
-            enemy: enemy,
+            enemy: this.enemy,
             callback: this._callback.bind(this)
         };
     }
@@ -31,4 +35,4 @@ class ActionEnemy extends Action {
     }
 }
 
-module.exports = NpcEnemy;
+module.exports = Npc_Monster;

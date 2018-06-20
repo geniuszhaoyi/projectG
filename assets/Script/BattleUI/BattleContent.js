@@ -55,9 +55,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        Global.Game = new Game();
-        Global.Player = new Player();
-        this.battle = new Battle(Global.Player, Global.Game.enemies['enemy_001']);
+        this.battle = Global.Game.battles.currentBattle;
         this.playerHp=cc.find("Canvas/Allhp");
         this.enemyHp=cc.find("Canvas/enhp");
         this.playerMp=cc.find("Canvas/playerMp");
