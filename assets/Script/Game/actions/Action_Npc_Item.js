@@ -17,13 +17,13 @@ class Action_Npc_Item extends Action{
         var name = Global.Game.items[this.item].name;
         if(Global.Player.getNpcStatus(this.id, true) === true) {
             return {
-                context: "It is empty now. ",
+                context: {title: "title", text: "It is empty now. "},
                 type: 0,
                 callback: this._callback.bind(this)
             };
         }else {
             return {
-                context: "You find a " + name + ". Pick it up? ",
+                context: {title: "title", text: "You find a " + name + ". Pick it up? "},
                 type: 1,
                 callback: this._callback_pickup.bind(this)
             };

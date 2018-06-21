@@ -55,7 +55,7 @@ cc.Class({
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
-        this.battle = Global.Game.battles.currentBattle;
+        this.battle = Global.Memory.battles.currentBattle;
         this.playerHp=cc.find("Canvas/Allhp");
         this.enemyHp=cc.find("Canvas/enhp");
         this.playerMp=cc.find("Canvas/playerMp");
@@ -125,10 +125,10 @@ cc.Class({
                 break;
         }
         if(event.event=="new round"&&event.round==0){
-            this.playerHp.getComponent('HpUI').initHp(event.currentStatus.player.hp,event.currentStatus.player.hp);
-            this.enemyHp.getComponent('HpUI').initHp(event.currentStatus.enemy.hp,event.currentStatus.enemy.hp);
-            this.playerMp.getComponent('HpUI').initHp(event.currentStatus.player.mp,event.currentStatus.player.mp);
-            this.enemyMp.getComponent('HpUI').initHp(event.currentStatus.enemy.mp,event.currentStatus.enemy.mp);
+            this.playerHp.getComponent('HpUI').initHp(event.currentStatus.player.derivedAttributes[0],event.currentStatus.player.hp);
+            this.enemyHp.getComponent('HpUI').initHp(event.currentStatus.enemy.derivedAttributes[0],event.currentStatus.enemy.hp);
+            this.playerMp.getComponent('HpUI').initHp(event.currentStatus.player.derivedAttributes[1],event.currentStatus.player.mp);
+            this.enemyMp.getComponent('HpUI').initHp(event.currentStatus.enemy.derivedAttributes[1],event.currentStatus.enemy.mp);
         }
         else{
             this.playerHp.getComponent('HpUI').setCurHp(event.currentStatus.player.hp);
