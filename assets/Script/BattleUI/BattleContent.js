@@ -76,8 +76,13 @@ cc.Class({
         var result="";
         switch(event.event){
             case "wins":
-                if(event.winner=="player")
+                if(event.winner=="player"){
                     result+="你取得了"+"<color=#EAF23B>"+"胜利"+"</color>"+"!";
+                    var dlist=Global.Memory.battles.dropItems.win;
+                    for(var item in dlist){
+                        result+="\n"+"得到了<color=#2255a5>"+Global.Game.items[dlist[item].itemid].name+"</color>  X<color=#367015>"+dlist[item].quantity+"</color>";
+                    }
+                }
                 else
                     result+="<color=#FF1D2B>你失败了</color>";
                 console.log("hi");

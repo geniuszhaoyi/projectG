@@ -73,6 +73,7 @@ cc.Class({
                     console.log("fight");
                     console.log(content);
                     Global.Memory.battles.currentBattle=new Battle(Global.Player, Global.Game.enemies[content.enemy.enemyid]);
+                    Global.Memory.battles.dropItems=content.dropItems;
                     cc.director.loadScene('BattleScene');
                 }
                 console.log("talk");
