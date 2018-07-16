@@ -10,15 +10,15 @@ module.exports = {
         7: 'currentMana',
     },
     derivedAttribute: {
-        0: 'maxHealth',
-        1: 'maxMana',
+        0: 'maxHealth',                // max health must bigger than 0
+        1: 'maxMana',                  // max Mana must bigger than 0 
         2: 'attack',
         3: 'magicPower',
         4: 'defense',
         5: 'magicResistance',
-        6: 'dodge',
-        7: 'hit',
-        8: 'critical',
+        6: 'dodge',                     //躲闪
+        7: 'hit',                       //命中
+        8: 'critical',                  //暴击
     },
     equipment: {
         0: 'helmet',
