@@ -137,6 +137,9 @@
     "_enabled": true,
     "movebtnPrefab": {
       "__uuid__": "9f761dfc-8c66-4808-95c0-aaf149a27543"
+    },
+    "actBtnPrefab": {
+      "__uuid__": "a711dcfe-293a-457e-8f3c-36076ed71eec"
     }
   },
   {
@@ -454,8 +457,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 881,
-      "y": 40
+      "x": 77,
+      "y": 605
     },
     "_skewX": 0,
     "_skewY": 0,

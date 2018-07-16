@@ -11,7 +11,7 @@ class Npc_Enemy extends Npc {
 class ActionEnemy extends Action {
     constructor(id, enemy) {
         super('NpcMonster' +id, '打他', '你打了一下' + enemy.name + '，好像惹怒他了！');
-        this.enemy=enemy
+        this.enemy = enemy
     }
     start() {
         return {
@@ -24,7 +24,7 @@ class ActionEnemy extends Action {
     _callback(message) {
         if(message === true || message === 'true') {
 
-            return new Action();
+            return new Action('callback_action', 'callback_action', 'callback action');
         }else {
 
             return false;
