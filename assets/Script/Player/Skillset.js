@@ -20,7 +20,7 @@ class Skillset {
     getEquippedSkills() {
         return this.equippedSkills;
     }
-    isEquipped(skillid) {
+    isEquippedBySkillid(skillid) {
         for(var skill of this.getEquippedSkills()) {
             if(skill === skillid) {
                 return true;
