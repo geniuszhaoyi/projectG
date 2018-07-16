@@ -105,7 +105,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 98,
+      "width": 150,
       "height": 40
     },
     "_rotationX": 0,
@@ -144,7 +144,7 @@
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
-    "_N$overflow": 0
+    "_N$overflow": 2
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -201,7 +201,8 @@
     },
     "maskPre": {
       "__uuid__": "4346ba36-5222-4e95-b14f-fe96edee9696"
-    }
+    },
+    "curnpc": null
   },
   {
     "__type__": "cc.Button",

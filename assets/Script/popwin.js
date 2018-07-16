@@ -51,7 +51,7 @@ cc.Class({
     initPop(npc){
         console.log(npc.actions);
         this.head.string=npc.name;
-        this.describe.string=npc.describe;
+        this.describe.string=npc.description;
         var tmp=this.node.getChildByName("action_layout");
         //console.log(tmp);
         tmp.getComponent('action_layout').loadbtn(npc.actions);
