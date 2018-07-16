@@ -1,6 +1,7 @@
 var Global = require('Global').storage;
 var Game = require('Game/Game.js')
 var Player = require('Player/Player.js')
+var Memory = require('Memory/Memory.js')
 
 cc.Class({
     extends: cc.Component,
@@ -14,6 +15,7 @@ cc.Class({
     newGame: function() {
         Global.Game = new Game();
         Global.Player = new Player();
+        Global.Memory = new Memory();
         console.log('Global: ');
         console.log(Global);
         cc.director.loadScene("MainPanel");

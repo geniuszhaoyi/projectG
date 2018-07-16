@@ -8,6 +8,8 @@
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/life-cycle-callbacks.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 var test=require("dialog");
+var Global = require('Global').storage;
+var Battle = require('Battle/Battle.js');
 cc.Class({
     extends: cc.Component,
 
@@ -66,8 +68,19 @@ cc.Class({
                 stch.getComponent('switch').initSW(content);
                 stch.setPosition(0,-202);
                 break;
-            case 2:
-                console.log("fight");
+            case 'battle':
+                var callback = function() {
+                    console.log("fight");
+                    console.log(content);
+                    Global.Memory.battles.currentBattle=new Battle(Global.Player, Global.Game.enemies[content.enemy.enemyid]);
+                    cc.director.loadScene('BattleScene');
+                }
+                console.log("talk");
+                var dia=cc.instantiate(this.diaPre);
+                cc.find("Canvas").addChild(dia);
+                content.localcallback = callback;
+                dia.getComponent('dialog').initdialog(content);
+                dia.setPosition(0,-202);
                 break;
             default:
                 console.log("ignore");

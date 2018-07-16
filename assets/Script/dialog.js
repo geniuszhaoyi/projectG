@@ -49,12 +49,13 @@ cc.Class({
     },
     initdialog(content){
         this.dia=content;
-        this.title.string=this.dia.name;
-        this.content.string=this.dia.context;
+        this.title.string=this.dia.context.title;
+        this.content.string=this.dia.context.text;
     },
     closeDialog(){
         var actlay=cc.find("Canvas/sidebar/sidebar_top/view/mask/popup/action_layout");
         //console.log(actlay);
+        if(this.dia.localcallback !== undefined) this.dia.localcallback();
         actlay.getComponent('action_layout').setbtn();
         this.node.removeFromParent();
     },
