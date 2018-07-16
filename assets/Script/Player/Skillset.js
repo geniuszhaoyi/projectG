@@ -20,6 +20,14 @@ class Skillset {
     getEquippedSkills() {
         return this.equippedSkills;
     }
+    isEquipped(skillid) {
+        for(var skill of this.getEquippedSkills()) {
+            if(skill === skillid) {
+                return true;
+            }
+        }
+        return false;
+    }
     equipSkill(skillid) {
         if(this.equippedSkills.length >= 5) {
             this.equippedSkills.splice(0, 1);
