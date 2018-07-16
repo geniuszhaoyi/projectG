@@ -37,6 +37,7 @@ cc.Class({
             default:null,
             type:cc.Prefab,
         },
+        equiped:null
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -48,6 +49,7 @@ cc.Class({
     // },
 
     seticon(skilld){
+        this.equiped=Global.Player.skillset.isEquippedBySkillid(skilld);
         this.skill=Global.Game.skills[skilld];
         console.log("this.skill  "+this.skill);
         cc.loader.loadRes("Texture/Item/"+this.skill.id, function(err, data) {

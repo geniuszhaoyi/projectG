@@ -36,6 +36,7 @@ cc.Class({
             type:cc.Label
         },
         skill:null,
+        equiped:null
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -44,18 +45,27 @@ cc.Class({
         this.node.removeFromParent();
     },
     equip(){
-        console.log(Global.Player.skillset.getEquippedSkills());
-        Global.Player.skillset.equipSkill(this.skill.id);
-        console.log(Global.Player.skillset.getEquippedSkills());
+        //console.log(Global.Player.skillset.getEquippedSkills());
+        if(!this.equiped)
+            Global.Player.skillset.equipSkill(this.skill.id);
+        else
+            Global.Player.skillset.unequipSkill(this.skill.id);
+        //console.log(Global.Player.skillset.getEquippedSkills());
         
         this.closePop();
         cc.director.loadScene('PlayerSkill');
     },
     // onLoad () {},
     initdetail(skill){
+        this.equiped=Global.Player.skillset.isEquippedBySkillid(skill.id);
         this.skill=skill;
         this.head.string=skill.name;
         this.describe.string=skill.description;
+        var labels=this.node.getChildByName("button1").getChildByName("Label").getComponent(cc.Label);
+        if(this.equiped)
+            labels.string="解除技能";
+        else
+            labels.string="装备技能";
     },
     start () {
 
