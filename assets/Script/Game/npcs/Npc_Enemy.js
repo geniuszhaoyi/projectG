@@ -16,6 +16,7 @@ class ActionEnemy extends Action {
         this.dropItems = {win: [{itemid: 'item_001', quantity: 1}], lose: []};
     }
     start() {
+        console.log(this.enemy);        
         return {
             context: {title: '', text: this.context},
             type: 'battle',
@@ -27,6 +28,7 @@ class ActionEnemy extends Action {
     _callback(message) {
         if(message === true || message === 'true') {
             for(var item of this.dropItems.win) {
+                console.log(item);                
                 Global.Player.invertory.giveItem(item.itemid, item.quantity);
             }
             return true;
