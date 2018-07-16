@@ -16,6 +16,7 @@ cc.Class({
         Global.Game = new Game();
         Global.Player = new Player();
         Global.Memory = new Memory();
+        Global.Player.skillset.learnSkill("skill_001");
         console.log('Global: ');
         console.log(Global);
         cc.director.loadScene("MainPanel");

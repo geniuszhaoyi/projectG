@@ -25,4 +25,7 @@ cc.Class({
     btnEquip(){
         cc.director.loadScene('PlayerEqument');
     },
+    btnSkill(){
+        cc.director.loadScene('PlayerSkill');
+    },
 });

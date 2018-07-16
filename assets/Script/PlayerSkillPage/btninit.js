@@ -1,4 +1,4 @@
-var skill1 = require("Battle/Game/skills/Skill_001");
+var Global = require('Global').storage;
 // Learn cc.Class:
 //  - [Chinese] http://docs.cocos.com/creator/manual/zh/scripting/class.html
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/class.html
@@ -41,16 +41,17 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
-    onLoad () {
-        var skilld=new skill1("skill_001");
-        this.seticon(skilld);
+    // onLoad () {
+    //     var skilld=new skill1("skill_001");
+    //     this.seticon(skilld);
         
-    },
+    // },
 
     seticon(skilld){
-        this.skill=skilld;
+        this.skill=Global.Game.skills[skilld];
+        console.log("this.skill  "+this.skill);
         cc.loader.loadRes("Texture/Item/"+this.skill.id, function(err, data) {
-            console.log(skilld.id);
+            //console.log(skilld.id);
             if (!err) {
                 this.spriteFrame = new cc.SpriteFrame(data);
             }else {

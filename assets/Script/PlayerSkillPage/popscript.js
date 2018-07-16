@@ -44,8 +44,12 @@ cc.Class({
         this.node.removeFromParent();
     },
     equip(){
+        console.log(Global.Player.skillset.getEquippedSkills());
         Global.Player.skillset.equipSkill(this.skill.id);
+        console.log(Global.Player.skillset.getEquippedSkills());
+        
         this.closePop();
+        cc.director.loadScene('PlayerSkill');
     },
     // onLoad () {},
     initdetail(skill){
