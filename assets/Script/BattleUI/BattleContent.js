@@ -42,6 +42,10 @@ cc.Class({
             default:null,
             type:cc.Prefab,
         },
+        button:{
+            default:null,
+            type:cc.Prefab,
+        },
         count:51,
         num:0,
         battle:null,
@@ -76,8 +80,13 @@ cc.Class({
         var result="";
         switch(event.event){
             case "wins":
-                if(event.winner=="player")
+                if(event.winner=="player"){
                     result+="你取得了"+"<color=#EAF23B>"+"胜利"+"</color>"+"!";
+                    var dlist=Global.Memory.battles.dropItems.win;
+                    for(var item in dlist){
+                        result+="\n"+"得到了<color=#2255a5>"+Global.Game.items[dlist[item].itemid].name+"</color> <color=#367015>x"+dlist[item].quantity+"</color>";
+                    }
+                }
                 else
                     result+="<color=#FF1D2B>你失败了</color>";
                 console.log("hi");
@@ -244,7 +253,11 @@ cc.Class({
             cont.addChild(newText);
 
             newText.getComponent(cc.RichText).string=this.reFormString(battleinfo);
-
+            if(battleinfo.event=="wins"){
+                //console.log("sssssssssssss!!!!");
+                var returnbutton=cc.instantiate(this.button);
+                cont.addChild(returnbutton);
+            }
             var scroll=cc.find("Canvas/scrollview");
             scroll.getComponent(cc.ScrollView).scrollToBottom(0.001);
         }

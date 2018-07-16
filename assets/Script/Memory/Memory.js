@@ -2,6 +2,7 @@
 class Memory {
     battles = {
         currentBattle: null,
+        dropItems:null,
     }
 }
 

@@ -2685,6 +2685,9 @@
     "context": {
       "__uuid__": "5d1e93b6-eaa1-482f-989b-bc89c4484c4e"
     },
+    "button": {
+      "__uuid__": "c50da716-c327-49f8-8f84-1ae05f910a6c"
+    },
     "count": 0,
     "num": 0,
     "battle": null,
