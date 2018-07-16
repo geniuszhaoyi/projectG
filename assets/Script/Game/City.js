@@ -1,11 +1,12 @@
 var Global = require("./../../Global").storage;
 
 class City {
-    constructor(id, name, position, to) {
+    constructor(id, name, position, to, action) {
         this.id = id;
         this.name = name;
         this.position = position;
         this.to = to;
+        this.action = action
         // if(to === undefined) this.to = []
     }
     getNpcList() {
