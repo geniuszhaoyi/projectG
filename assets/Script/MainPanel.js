@@ -8,6 +8,10 @@ cc.Class({
             default: null,
             type: cc.Prefab
         },
+        actBtnPrefab: {
+            default: null,
+            type: cc.Prefab
+        },
     },
 
     updateVisiableNodes: function () {
@@ -69,6 +73,17 @@ cc.Class({
         // console.log("currentCity: " + Global.Player.currentCity);
         this.updateVisiableNodes();
         this.drawMap();
+        this.triggerOnloadAction();
+    },
+
+    triggerOnloadAction: function() {
+        var action = Global.Game.cities[Global.Player.currentCity].action;
+        if(action !== undefined) {
+            var actBtn = cc.instantiate(this.actBtnPrefab);
+            console.log(actBtn);
+            actBtn.getComponent("actbtn").initBtn(action);
+            actBtn.getComponent("actbtn").btn_clicked();
+        }
     },
 
     btnMove: function (event, customEventData) {

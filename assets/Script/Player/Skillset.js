@@ -17,6 +17,9 @@ class Skillset {
         }
     }
     equippedSkills = [];
+    getEquippedSkills() {
+        return this.equippedSkills;
+    }
     equipSkill(skillid) {
         if(this.equippedSkills.length >= 5) {
             this.equippedSkills.splice(0, 1);
