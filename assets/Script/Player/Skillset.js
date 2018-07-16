@@ -29,6 +29,9 @@ class Skillset {
         return false;
     }
     equipSkill(skillid) {
+        if(isEquippedBySkillid(skillid)) {
+            return false;
+        }
         if(this.equippedSkills.length >= 5) {
             this.equippedSkills.splice(0, 1);
         }
