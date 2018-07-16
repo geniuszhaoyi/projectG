@@ -128,6 +128,18 @@
     "_fitHeight": true
   },
   {
+    "__type__": "5888fwgT+dM/o95kcmsk5dx",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 2
+    },
+    "_enabled": true,
+    "sidebarPrefab": {
+      "__uuid__": "189fbf01-0989-47d6-b3b2-696432c4226b"
+    }
+  },
+  {
     "__type__": "fb1abGIduVFMZVbaiIpBYcr",
     "_name": "",
     "_objFlags": 0,
@@ -140,18 +152,6 @@
     },
     "actBtnPrefab": {
       "__uuid__": "a711dcfe-293a-457e-8f3c-36076ed71eec"
-    }
-  },
-  {
-    "__type__": "5888fwgT+dM/o95kcmsk5dx",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 2
-    },
-    "_enabled": true,
-    "sidebarPrefab": {
-      "__uuid__": "189fbf01-0989-47d6-b3b2-696432c4226b"
     }
   },
   {

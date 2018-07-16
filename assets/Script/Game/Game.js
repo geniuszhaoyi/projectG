@@ -17,7 +17,7 @@ class Game {
         city_001: new City("city_001", "Home", new Position(10, 10, "bg_001"), [{id: "city_002", requiredItems: ["key_001"]}], undefined),
         city_002: new City("city_002", "Yard", new Position(120, 10, "bg_001"), [{id: "city_001"}, {id: "city_003"}], undefined),
         city_003: new City("city_003", "Street", new Position(120, 120, "bg_001"), [{id: "city_001"}, {id: "city_002"}, {id: "city_004", requiredItems: ["weapon_001"]}], undefined),
-        city_004: new City("city_004", "Cave", new Position(-300, 180, "bg_001"), [], new Action_Enemy('city004_action', {name: '哥布林', description: '一只看起来很弱的哥布林', enemyid: 'enemy_001', drop: [{item: 'item_001', quantity: 1, possibility: 50}]}, 1)),
+        city_004: new City("city_004", "Cave", new Position(-300, 180, "bg_001"), [], new Action_Enemy('city004_action', {name: '哥布林', description: '一只看起来很弱的哥布林', enemyid: 'enemy_001'}, 1)),
     }
     items = {
         item_001:   new Item("item_001", "Moldy Book", "An old moldy book. You can hardly read the writing. "),
@@ -33,8 +33,8 @@ class Game {
     npcs = {
         npc_001: new Npc_001(),
         npc_002: new Npc_Item('npc_002', {name: 'Old Well', description: 'It has been abandon for years. Looks like something is down there. '}, 'city_003', 'weapon_001', 1),
-        npc_003: new Npc_Enemy('npc_003', {name: '哥布林', description: '一只看起来很弱的哥布林', enemyid: 'enemy_001', drop: [{item: 'item_001', quantity: 1, possibility: 50}]}),
-        npc_004: new Npc_Enemy('npc_004', {name: '样树皮', description: '成了精的树的衣服？', enemyid: 'enemy_002', drop: [{item: 'item_001', quantity: 1, possibility: 50}]}),
+        npc_003: new Npc_Enemy('npc_003', {name: '哥布林', description: '一只看起来很弱的哥布林', enemyid: 'enemy_001'}),
+        npc_004: new Npc_Enemy('npc_004', {name: '样树皮', description: '成了精的树的衣服？', enemyid: 'enemy_002'}),
     }
     enemies = {
         enemy_001: new Enemy([150, 1000, 0, 0, 0, 0, 1000, 0, 0], ['skill_001']),
